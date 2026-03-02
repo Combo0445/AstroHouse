@@ -15,8 +15,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF3E2723),
+          brightness: Brightness.light,
+        ),
         textTheme: GoogleFonts.robotoTextTheme(),
-        primarySwatch: Colors.brown,
       ),
       home: const MenuBookPage(),
     );
