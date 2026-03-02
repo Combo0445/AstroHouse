@@ -13,6 +13,7 @@ class MenuBookPage extends StatefulWidget {
 
 class _MenuBookPageState extends State<MenuBookPage> {
   final _controller = GlobalKey<PageFlipWidgetState>();
+  final Map<String, int> _categoryIndices = {};
 
   // Premium Colors
   static const Color goldAccent = Color(0xFFD4AF37);
@@ -27,15 +28,21 @@ class _MenuBookPageState extends State<MenuBookPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: PageFlipWidget(
-        key: _controller,
-        backgroundColor: Colors.black,
-        lastPage: _buildLastPage(),
+      body: Stack(
         children: [
-          _buildCoverPage(),
-          _buildWelcomeQRPage(),
-          ..._buildAllMenuPages(),
-          _buildBackCoverPage(),
+          PageFlipWidget(
+            key: _controller,
+            backgroundColor: Colors.black,
+            lastPage: _buildLastPage(),
+            children: [
+              _buildCoverPage(),
+              _buildWelcomeQRPage(),
+              _buildTOCPage(),
+              ..._buildAllMenuPages(),
+              _buildBackCoverPage(),
+            ],
+          ),
+          _buildSideTabs(),
         ],
       ),
     );
@@ -43,42 +50,59 @@ class _MenuBookPageState extends State<MenuBookPage> {
 
   List<Widget> _buildAllMenuPages() {
     List<Widget> pages = [];
+    _categoryIndices.clear();
+
+    // The first 2 pages are Cover(0), WelcomeQR(1), and TOC(2)
+    // So the menu pages start at index 3
+    int currentIndex = 3;
 
     // Drinks Pages
     if (menuData.containsKey("Drinks")) {
+      _categoryIndices["Beverages"] = currentIndex;
       pages.add(
         _buildCategoryIntroPage("Beverages", "Refreshing & Fine Selections"),
       );
+      currentIndex++;
       menuData["Drinks"].forEach((title, data) {
         pages.add(_buildMenuCategoryPage(title, data));
+        currentIndex++;
       });
     }
 
     // Food Pages
     if (menuData.containsKey("Food")) {
+      _categoryIndices["Cuisine"] = currentIndex;
       pages.add(_buildCategoryIntroPage("Cuisine", "A Culinary Journey"));
+      currentIndex++;
       menuData["Food"].forEach((subCategory, data) {
         if (subCategory != "Others") {
           pages.add(_buildMenuCategoryPage(subCategory, data));
+          currentIndex++;
         }
       });
     }
 
     // Dessert Pages
     if (menuData.containsKey("Dessert")) {
+      _categoryIndices["Sweets"] = currentIndex;
       pages.add(_buildCategoryIntroPage("Sweets", "The Perfect Ending"));
+      currentIndex++;
       menuData["Dessert"].forEach((title, data) {
         pages.add(_buildMenuCategoryPage(title, data));
+        currentIndex++;
       });
     }
 
     // Chorizo Pages
     if (menuData.containsKey("Chorizo")) {
+      _categoryIndices["Chorizo"] = currentIndex;
       pages.add(
         _buildCategoryIntroPage("Chorizo", "Premium Sausage Selections"),
       );
+      currentIndex++;
       menuData["Chorizo"].forEach((title, data) {
         pages.add(_buildMenuCategoryPage(title, data));
+        currentIndex++;
       });
     }
 
@@ -479,6 +503,137 @@ class _MenuBookPageState extends State<MenuBookPage> {
           const SizedBox(height: 8),
           Divider(color: goldAccent.withValues(alpha: 0.1), thickness: 0.5),
         ],
+      ),
+    );
+  }
+
+  Widget _buildTOCPage() {
+    return Container(
+      decoration: BoxDecoration(
+        color: vintagePaper,
+        border: Border.all(color: goldAccent.withValues(alpha: 0.3), width: 15),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 60),
+      child: Column(
+        children: [
+          Text(
+            'CONTENTS',
+            style: GoogleFonts.cinzel(
+              color: textDark,
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 4,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Container(height: 2, width: 60, color: goldAccent),
+          const SizedBox(height: 50),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:
+                  _categoryIndices.entries.map((entry) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      child: InkWell(
+                        onTap:
+                            () =>
+                                _controller.currentState?.goToPage(entry.value),
+                        child: Row(
+                          children: [
+                            Text(
+                              entry.key.toUpperCase(),
+                              style: GoogleFonts.cinzel(
+                                color: textDark,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            const Expanded(
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 8),
+                                child: Text(
+                                  '...................................',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.clip,
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              ),
+                            ),
+                            Text(
+                              '${entry.value + 1}',
+                              style: GoogleFonts.playfairDisplay(
+                                color: goldAccent,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }).toList(),
+            ),
+          ),
+          Text(
+            '~ Astro House ~',
+            style: GoogleFonts.playfairDisplay(
+              color: Colors.brown.shade300,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSideTabs() {
+    return Positioned(
+      right: 0,
+      top: 100,
+      bottom: 100,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:
+            _categoryIndices.entries.map((entry) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                child: InkWell(
+                  onTap: () => _controller.currentState?.goToPage(entry.value),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 15,
+                    ),
+                    decoration: BoxDecoration(
+                      color: goldAccent,
+                      borderRadius: const BorderRadius.horizontal(
+                        left: Radius.circular(8),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.3),
+                          blurRadius: 4,
+                          offset: const Offset(-2, 2),
+                        ),
+                      ],
+                    ),
+                    child: RotatedBox(
+                      quarterTurns: 1,
+                      child: Text(
+                        entry.key.substring(0, 3).toUpperCase(),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
       ),
     );
   }
