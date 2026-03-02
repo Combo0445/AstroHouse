@@ -21,7 +21,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
   static const Color textDark = Color(0xFF2D241E);
 
   // Menu URL for QR Code (Change this after deployment)
-  final String menuUrl = "http://localhost:8080";
+  final String menuUrl = "https://Combo0445.github.io/AstroHouse/";
 
   @override
   Widget build(BuildContext context) {

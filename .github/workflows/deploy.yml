@@ -16,7 +16,7 @@ jobs:
           channel: 'stable'
           
       - run: flutter pub get
-      - run: flutter build web --release --base-href "/restaurant_menu/"
+      - run: flutter build web --release --base-href "/AstroHouse/"
       
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
