@@ -63,7 +63,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
 
     // Drinks Pages
     if (menuData.containsKey("Drinks")) {
-      _categoryIndices["☕ Drinks"] = currentIndex;
+      _categoryIndices["[DRINKS]"] = currentIndex;
       pages.add(
         _buildCategoryIntroPage("Beverages", "Refreshing & Fine Selections"),
       );
@@ -77,7 +77,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
 
     // Food Pages
     if (menuData.containsKey("Food")) {
-      _categoryIndices["🍽️ Food"] = currentIndex;
+      _categoryIndices["[FOOD]"] = currentIndex;
       pages.add(_buildCategoryIntroPage("Cuisine", "A Culinary Journey"));
       currentIndex++;
       menuData["Food"].forEach((subCategory, data) {
@@ -89,7 +89,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
 
     // Dessert Pages
     if (menuData.containsKey("Dessert")) {
-      _categoryIndices["🍰 Dessert"] = currentIndex;
+      _categoryIndices["[DESSERT]"] = currentIndex;
       pages.add(_buildCategoryIntroPage("Sweets", "The Perfect Ending"));
       currentIndex++;
       menuData["Dessert"].forEach((title, data) {
@@ -570,12 +570,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children:
                   _categoryIndices.entries
-                      .where(
-                        (e) =>
-                            e.key.startsWith('☕') ||
-                            e.key.startsWith('🍽') ||
-                            e.key.startsWith('🍰'),
-                      )
+                      .where((e) => e.key.startsWith('['))
                       .map((entry) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 12),
@@ -587,7 +582,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
                             child: Row(
                               children: [
                                 Text(
-                                  entry.key.toUpperCase(),
+                                  entry.key.replaceAll(RegExp(r'[\[\]]'), ''),
                                   style: GoogleFonts.cinzel(
                                     color: textDark,
                                     fontSize: 20,
@@ -635,13 +630,18 @@ class _MenuBookPageState extends State<MenuBookPage> {
     );
   }
 
+  // Map of section headers to display names and icons
+  static const Map<String, Map<String, dynamic>> _sectionInfo = {
+    '[DRINKS]': {'label': 'DRINKS', 'icon': Icons.local_cafe},
+    '[FOOD]': {'label': 'FOOD', 'icon': Icons.restaurant},
+    '[DESSERT]': {'label': 'DESSERT', 'icon': Icons.cake},
+  };
+
   Widget _buildSideTabs() {
-    // Section headers start with emoji
-    bool isHeader(String key) =>
-        key.startsWith('☕') || key.startsWith('🍽') || key.startsWith('🍰');
+    bool isHeader(String key) => key.startsWith('[');
 
     return Container(
-      width: 52,
+      width: 60,
       decoration: const BoxDecoration(
         color: deepLeather,
         border: Border(left: BorderSide(color: goldAccent, width: 1)),
@@ -650,11 +650,11 @@ class _MenuBookPageState extends State<MenuBookPage> {
         children: [
           // Logo at top
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 8),
+            padding: const EdgeInsets.symmetric(vertical: 10),
             child: const Icon(
               Icons.restaurant_menu,
               color: goldAccent,
-              size: 18,
+              size: 20,
             ),
           ),
           Container(height: 1, color: goldAccent.withValues(alpha: 0.3)),
@@ -665,38 +665,51 @@ class _MenuBookPageState extends State<MenuBookPage> {
                 children:
                     _categoryIndices.entries.map((entry) {
                       if (isHeader(entry.key)) {
-                        // Section header
-                        return Column(
-                          children: [
-                            Container(
-                              height: 1,
+                        final info = _sectionInfo[entry.key];
+                        return InkWell(
+                          onTap:
+                              () => _controller.currentState?.goToPage(
+                                entry.value,
+                              ),
+                          child: Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            decoration: BoxDecoration(
                               color: goldAccent.withValues(alpha: 0.2),
-                            ),
-                            InkWell(
-                              onTap:
-                                  () => _controller.currentState?.goToPage(
-                                    entry.value,
-                                  ),
-                              child: Container(
-                                width: double.infinity,
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 6,
+                              border: Border(
+                                top: BorderSide(
+                                  color: goldAccent.withValues(alpha: 0.4),
+                                  width: 1,
                                 ),
-                                color: goldAccent.withValues(alpha: 0.15),
-                                child: Text(
-                                  entry.key,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                bottom: BorderSide(
+                                  color: goldAccent.withValues(alpha: 0.4),
+                                  width: 1,
                                 ),
                               ),
                             ),
-                          ],
+                            child: Column(
+                              children: [
+                                Icon(
+                                  info?['icon'] as IconData? ?? Icons.menu_book,
+                                  color: goldAccent,
+                                  size: 14,
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  info?['label'] as String? ?? '',
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.cinzel(
+                                    color: goldAccent,
+                                    fontSize: 7,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         );
                       } else {
-                        // Subcategory button
                         return InkWell(
                           onTap:
                               () => _controller.currentState?.goToPage(
@@ -705,13 +718,13 @@ class _MenuBookPageState extends State<MenuBookPage> {
                           child: Container(
                             width: double.infinity,
                             padding: const EdgeInsets.symmetric(
-                              vertical: 6,
-                              horizontal: 3,
+                              vertical: 5,
+                              horizontal: 4,
                             ),
                             decoration: BoxDecoration(
                               border: Border(
                                 bottom: BorderSide(
-                                  color: goldAccent.withValues(alpha: 0.1),
+                                  color: goldAccent.withValues(alpha: 0.08),
                                   width: 0.5,
                                 ),
                               ),
@@ -723,9 +736,9 @@ class _MenuBookPageState extends State<MenuBookPage> {
                               overflow: TextOverflow.ellipsis,
                               style: GoogleFonts.lora(
                                 color: goldAccent.withValues(alpha: 0.85),
-                                fontSize: 8,
+                                fontSize: 7,
                                 fontWeight: FontWeight.w500,
-                                height: 1.3,
+                                height: 1.2,
                               ),
                             ),
                           ),
