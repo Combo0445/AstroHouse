@@ -44,6 +44,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
               _buildWelcomeQRPage(),
               _buildTOCPage(),
               ...menuPages,
+              _buildContactPage(),
             ],
           ),
           Positioned(
@@ -273,6 +274,97 @@ class _MenuBookPageState extends State<MenuBookPage> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildContactPage() {
+    return Container(
+      decoration: BoxDecoration(
+        color: deepLeather,
+        border: Border.all(color: goldAccent.withValues(alpha: 0.3), width: 10),
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.stars, color: goldAccent, size: 40),
+            const SizedBox(height: 20),
+            Text(
+              'THANK YOU',
+              style: GoogleFonts.cinzel(
+                color: goldAccent,
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 3,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'FOR VISITING ASTRO HOUSE',
+              style: GoogleFonts.lora(
+                color: vintagePaper.withValues(alpha: 0.7),
+                fontSize: 12,
+                letterSpacing: 2,
+              ),
+            ),
+            const SizedBox(height: 50),
+            Container(
+              width: 150,
+              height: 1,
+              color: goldAccent.withValues(alpha: 0.3),
+            ),
+            const SizedBox(height: 50),
+            _buildContactRow(
+              Icons.chat_bubble_outline,
+              'LINE OA',
+              '@astrohouse',
+            ),
+            const SizedBox(height: 20),
+            _buildContactRow(
+              Icons.facebook,
+              'FACEBOOK',
+              'Astro House Gastronomy',
+            ),
+            const SizedBox(height: 20),
+            _buildContactRow(Icons.phone_outlined, 'CALL US', '089-123-4567'),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildContactRow(IconData icon, String title, String detail) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(icon, color: goldAccent, size: 20),
+        const SizedBox(width: 15),
+        SizedBox(
+          width: 180,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: GoogleFonts.cinzel(
+                  color: goldAccent,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                detail,
+                style: GoogleFonts.lora(
+                  color: vintagePaper.withValues(alpha: 0.9),
+                  fontSize: 13,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
