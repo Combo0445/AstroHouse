@@ -27,27 +27,40 @@ class _MenuBookPageState extends State<MenuBookPage> {
   @override
   Widget build(BuildContext context) {
     // Build menu pages FIRST so _categoryIndices is populated
-    // before TOC and SideTabs try to use it
+    // before TOC and Drawer try to use it
     final menuPages = _buildAllMenuPages();
 
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Row(
+      endDrawer: _buildDrawer(),
+      body: Stack(
         children: [
-          Expanded(
-            child: PageFlipWidget(
-              key: _controller,
-              backgroundColor: Colors.black,
-              lastPage: Container(color: deepLeather),
-              children: [
-                _buildCoverPage(),
-                _buildWelcomeQRPage(),
-                _buildTOCPage(),
-                ...menuPages,
-              ],
+          PageFlipWidget(
+            key: _controller,
+            backgroundColor: Colors.black,
+            lastPage: Container(color: deepLeather),
+            children: [
+              _buildCoverPage(),
+              _buildWelcomeQRPage(),
+              _buildTOCPage(),
+              ...menuPages,
+            ],
+          ),
+          Positioned(
+            top: 25,
+            right: 25,
+            child: Builder(
+              builder: (context) {
+                return FloatingActionButton(
+                  backgroundColor: goldAccent,
+                  foregroundColor: deepLeather,
+                  elevation: 8,
+                  onPressed: () => Scaffold.of(context).openEndDrawer(),
+                  child: const Icon(Icons.restaurant_menu),
+                );
+              },
             ),
           ),
-          _buildSideTabs(),
         ],
       ),
     );
@@ -637,166 +650,129 @@ class _MenuBookPageState extends State<MenuBookPage> {
     '[DESSERT]': {'label': 'DESSERT', 'icon': Icons.cake},
   };
 
-  Widget _buildSideTabs() {
-    bool isHeader(String key) => key.startsWith('[');
+  Widget _buildDrawer() {
+    List<Widget> drawerItems = [];
+    Map<String, List<MapEntry<String, int>>> grouped = {};
+    String currentHeader = '';
 
-    return Container(
-      width: 70,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            deepLeather,
-            deepLeather.withValues(alpha: 0.95),
-            const Color(0xFF2C1810),
-          ],
-        ),
-        border: const Border(left: BorderSide(color: goldAccent, width: 1.5)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.3),
-            blurRadius: 8,
-            offset: const Offset(-3, 0),
+    // Group categories
+    for (var entry in _categoryIndices.entries) {
+      if (entry.key.startsWith('[')) {
+        currentHeader = entry.key;
+        grouped[currentHeader] = [];
+      } else {
+        if (currentHeader.isNotEmpty) {
+          grouped[currentHeader]!.add(entry);
+        }
+      }
+    }
+
+    // Build ExpansionTiles
+    grouped.forEach((headerKey, items) {
+      final info = _sectionInfo[headerKey];
+      final headerIndex = _categoryIndices[headerKey]!;
+
+      drawerItems.add(
+        Theme(
+          data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+          child: ExpansionTile(
+            initiallyExpanded: false,
+            iconColor: goldAccent,
+            collapsedIconColor: goldAccent,
+            title: GestureDetector(
+              onTap: () {
+                Navigator.pop(context); // close drawer
+                _controller.currentState?.goToPage(headerIndex);
+              },
+              child: Row(
+                children: [
+                  Icon(
+                    info?['icon'] as IconData? ?? Icons.menu_book,
+                    color: goldAccent,
+                    size: 22,
+                  ),
+                  const SizedBox(width: 15),
+                  Text(
+                    info?['label'] as String? ?? '',
+                    style: GoogleFonts.cinzel(
+                      color: goldAccent,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1.5,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            children:
+                items.map((subItem) {
+                  return ListTile(
+                    contentPadding: const EdgeInsets.only(left: 55, right: 16),
+                    title: Text(
+                      subItem.key,
+                      style: GoogleFonts.lora(
+                        color: vintagePaper,
+                        fontSize: 15,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.pop(context);
+                      _controller.currentState?.goToPage(subItem.value);
+                    },
+                  );
+                }).toList(),
           ),
-        ],
-      ),
+        ),
+      );
+    });
+
+    return Drawer(
+      backgroundColor: deepLeather,
       child: Column(
         children: [
-          // Logo area
+          // Drawer Header
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 12),
+            width: double.infinity,
+            padding: const EdgeInsets.only(top: 60, bottom: 25),
             decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [const Color(0xFF2C1810), deepLeather],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
               border: Border(
-                bottom: BorderSide(
-                  color: goldAccent.withValues(alpha: 0.3),
-                  width: 1,
-                ),
+                bottom: BorderSide(color: goldAccent.withValues(alpha: 0.3)),
               ),
             ),
             child: Column(
               children: [
                 Container(
-                  width: 28,
-                  height: 28,
+                  width: 80,
+                  height: 80,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(color: goldAccent, width: 1.5),
+                    border: Border.all(color: goldAccent, width: 2),
                   ),
-                  child: const Icon(Icons.star, color: goldAccent, size: 14),
+                  child: const Icon(Icons.star, color: goldAccent, size: 40),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 15),
                 Text(
-                  'MENU',
+                  'ASTRO MENU',
                   style: GoogleFonts.cinzel(
                     color: goldAccent,
-                    fontSize: 7,
+                    fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    letterSpacing: 2,
+                    letterSpacing: 2.5,
                   ),
                 ),
               ],
             ),
           ),
-          // Scrollable navigation
+          // Categories
           Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(vertical: 4),
-              child: Column(
-                children:
-                    _categoryIndices.entries.map((entry) {
-                      if (isHeader(entry.key)) {
-                        final info = _sectionInfo[entry.key];
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 8, bottom: 2),
-                          child: InkWell(
-                            onTap:
-                                () => _controller.currentState?.goToPage(
-                                  entry.value,
-                                ),
-                            child: Container(
-                              margin: const EdgeInsets.symmetric(horizontal: 5),
-                              padding: const EdgeInsets.symmetric(vertical: 6),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    goldAccent.withValues(alpha: 0.25),
-                                    goldAccent.withValues(alpha: 0.1),
-                                  ],
-                                ),
-                                borderRadius: BorderRadius.circular(6),
-                                border: Border.all(
-                                  color: goldAccent.withValues(alpha: 0.3),
-                                  width: 0.5,
-                                ),
-                              ),
-                              child: Column(
-                                children: [
-                                  Icon(
-                                    info?['icon'] as IconData? ??
-                                        Icons.menu_book,
-                                    color: goldAccent,
-                                    size: 16,
-                                  ),
-                                  const SizedBox(height: 3),
-                                  Text(
-                                    info?['label'] as String? ?? '',
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.cinzel(
-                                      color: goldAccent,
-                                      fontSize: 6.5,
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: 0.5,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      } else {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 6,
-                            vertical: 1.5,
-                          ),
-                          child: InkWell(
-                            onTap:
-                                () => _controller.currentState?.goToPage(
-                                  entry.value,
-                                ),
-                            borderRadius: BorderRadius.circular(4),
-                            child: Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 4,
-                                horizontal: 4,
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(4),
-                                border: Border.all(
-                                  color: goldAccent.withValues(alpha: 0.08),
-                                  width: 0.5,
-                                ),
-                              ),
-                              child: Text(
-                                entry.key,
-                                textAlign: TextAlign.center,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: GoogleFonts.lora(
-                                  color: goldAccent.withValues(alpha: 0.8),
-                                  fontSize: 7,
-                                  fontWeight: FontWeight.w500,
-                                  height: 1.15,
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      }
-                    }).toList(),
-              ),
+            child: ListView(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              children: drawerItems,
             ),
           ),
         ],
