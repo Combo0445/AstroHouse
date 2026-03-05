@@ -44,7 +44,6 @@ class _MenuBookPageState extends State<MenuBookPage> {
                 _buildWelcomeQRPage(),
                 _buildTOCPage(),
                 ...menuPages,
-                _buildBackCoverPage(),
                 _buildLastPage(),
               ],
             ),
@@ -82,10 +81,8 @@ class _MenuBookPageState extends State<MenuBookPage> {
       pages.add(_buildCategoryIntroPage("Cuisine", "A Culinary Journey"));
       currentIndex++;
       menuData["Food"].forEach((subCategory, data) {
-        if (subCategory != "Others") {
-          pages.add(_buildMenuCategoryPage(subCategory, data));
-          currentIndex++;
-        }
+        pages.add(_buildMenuCategoryPage(subCategory, data));
+        currentIndex++;
       });
     }
 
@@ -95,19 +92,6 @@ class _MenuBookPageState extends State<MenuBookPage> {
       pages.add(_buildCategoryIntroPage("Sweets", "The Perfect Ending"));
       currentIndex++;
       menuData["Dessert"].forEach((title, data) {
-        pages.add(_buildMenuCategoryPage(title, data));
-        currentIndex++;
-      });
-    }
-
-    // Chorizo Pages
-    if (menuData.containsKey("Chorizo")) {
-      _categoryIndices["Chorizo"] = currentIndex;
-      pages.add(
-        _buildCategoryIntroPage("Chorizo", "Premium Sausage Selections"),
-      );
-      currentIndex++;
-      menuData["Chorizo"].forEach((title, data) {
         pages.add(_buildMenuCategoryPage(title, data));
         currentIndex++;
       });
@@ -277,7 +261,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
     );
   }
 
-  Widget _buildBackCoverPage() {
+  Widget _buildLastPage() {
     return Container(
       color: deepLeather,
       child: Center(
@@ -290,19 +274,12 @@ class _MenuBookPageState extends State<MenuBookPage> {
               'ESTABLISHED 2024',
               style: GoogleFonts.cinzel(color: goldAccent, fontSize: 12),
             ),
+            const SizedBox(height: 30),
+            Text(
+              'THANK YOU',
+              style: GoogleFonts.cinzel(color: goldAccent, fontSize: 24),
+            ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLastPage() {
-    return Container(
-      color: Colors.black,
-      child: Center(
-        child: Text(
-          'THANK YOU',
-          style: GoogleFonts.cinzel(color: goldAccent, fontSize: 24),
         ),
       ),
     );
