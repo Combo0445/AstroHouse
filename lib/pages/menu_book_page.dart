@@ -63,12 +63,13 @@ class _MenuBookPageState extends State<MenuBookPage> {
 
     // Drinks Pages
     if (menuData.containsKey("Drinks")) {
-      _categoryIndices["Beverages"] = currentIndex;
+      _categoryIndices["☕ Drinks"] = currentIndex;
       pages.add(
         _buildCategoryIntroPage("Beverages", "Refreshing & Fine Selections"),
       );
       currentIndex++;
       menuData["Drinks"].forEach((title, data) {
+        _categoryIndices[title] = currentIndex;
         pages.add(_buildMenuCategoryPage(title, data, showImage: false));
         currentIndex++;
       });
@@ -76,10 +77,11 @@ class _MenuBookPageState extends State<MenuBookPage> {
 
     // Food Pages
     if (menuData.containsKey("Food")) {
-      _categoryIndices["Cuisine"] = currentIndex;
+      _categoryIndices["🍽️ Food"] = currentIndex;
       pages.add(_buildCategoryIntroPage("Cuisine", "A Culinary Journey"));
       currentIndex++;
       menuData["Food"].forEach((subCategory, data) {
+        _categoryIndices[subCategory] = currentIndex;
         pages.add(_buildMenuCategoryPage(subCategory, data));
         currentIndex++;
       });
@@ -87,10 +89,11 @@ class _MenuBookPageState extends State<MenuBookPage> {
 
     // Dessert Pages
     if (menuData.containsKey("Dessert")) {
-      _categoryIndices["Sweets"] = currentIndex;
+      _categoryIndices["🍰 Dessert"] = currentIndex;
       pages.add(_buildCategoryIntroPage("Sweets", "The Perfect Ending"));
       currentIndex++;
       menuData["Dessert"].forEach((title, data) {
+        _categoryIndices[title] = currentIndex;
         pages.add(_buildMenuCategoryPage(title, data));
         currentIndex++;
       });
@@ -566,47 +569,58 @@ class _MenuBookPageState extends State<MenuBookPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children:
-                  _categoryIndices.entries.map((entry) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      child: InkWell(
-                        onTap:
-                            () =>
-                                _controller.currentState?.goToPage(entry.value),
-                        child: Row(
-                          children: [
-                            Text(
-                              entry.key.toUpperCase(),
-                              style: GoogleFonts.cinzel(
-                                color: textDark,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            const Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 8),
-                                child: Text(
-                                  '...................................',
-                                  maxLines: 1,
-                                  overflow: TextOverflow.clip,
-                                  style: TextStyle(color: Colors.grey),
+                  _categoryIndices.entries
+                      .where(
+                        (e) =>
+                            e.key.startsWith('☕') ||
+                            e.key.startsWith('🍽') ||
+                            e.key.startsWith('🍰'),
+                      )
+                      .map((entry) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          child: InkWell(
+                            onTap:
+                                () => _controller.currentState?.goToPage(
+                                  entry.value,
                                 ),
-                              ),
+                            child: Row(
+                              children: [
+                                Text(
+                                  entry.key.toUpperCase(),
+                                  style: GoogleFonts.cinzel(
+                                    color: textDark,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                const Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                    ),
+                                    child: Text(
+                                      '...................................',
+                                      maxLines: 1,
+                                      overflow: TextOverflow.clip,
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  '${entry.value + 1}',
+                                  style: GoogleFonts.playfairDisplay(
+                                    color: goldAccent,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
                             ),
-                            Text(
-                              '${entry.value + 1}',
-                              style: GoogleFonts.playfairDisplay(
-                                color: goldAccent,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }).toList(),
+                          ),
+                        );
+                      })
+                      .toList(),
             ),
           ),
           Text(
@@ -622,51 +636,106 @@ class _MenuBookPageState extends State<MenuBookPage> {
   }
 
   Widget _buildSideTabs() {
+    // Section headers start with emoji
+    bool isHeader(String key) =>
+        key.startsWith('☕') || key.startsWith('🍽') || key.startsWith('🍰');
+
     return Container(
-      width: 36,
-      color: Colors.black,
+      width: 52,
+      decoration: const BoxDecoration(
+        color: deepLeather,
+        border: Border(left: BorderSide(color: goldAccent, width: 1)),
+      ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children:
-            _categoryIndices.entries.map((entry) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                child: InkWell(
-                  onTap: () => _controller.currentState?.goToPage(entry.value),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 6,
-                      vertical: 14,
-                    ),
-                    decoration: BoxDecoration(
-                      color: goldAccent,
-                      borderRadius: const BorderRadius.horizontal(
-                        left: Radius.circular(8),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.3),
-                          blurRadius: 4,
-                          offset: const Offset(-2, 2),
-                        ),
-                      ],
-                    ),
-                    child: RotatedBox(
-                      quarterTurns: 1,
-                      child: Text(
-                        entry.key.substring(0, 3).toUpperCase(),
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 9,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            }).toList(),
+        children: [
+          // Logo at top
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: const Icon(
+              Icons.restaurant_menu,
+              color: goldAccent,
+              size: 18,
+            ),
+          ),
+          Container(height: 1, color: goldAccent.withValues(alpha: 0.3)),
+          // Scrollable tabs
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children:
+                    _categoryIndices.entries.map((entry) {
+                      if (isHeader(entry.key)) {
+                        // Section header
+                        return Column(
+                          children: [
+                            Container(
+                              height: 1,
+                              color: goldAccent.withValues(alpha: 0.2),
+                            ),
+                            InkWell(
+                              onTap:
+                                  () => _controller.currentState?.goToPage(
+                                    entry.value,
+                                  ),
+                              child: Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 6,
+                                ),
+                                color: goldAccent.withValues(alpha: 0.15),
+                                child: Text(
+                                  entry.key,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      } else {
+                        // Subcategory button
+                        return InkWell(
+                          onTap:
+                              () => _controller.currentState?.goToPage(
+                                entry.value,
+                              ),
+                          child: Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 6,
+                              horizontal: 3,
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: goldAccent.withValues(alpha: 0.1),
+                                  width: 0.5,
+                                ),
+                              ),
+                            ),
+                            child: Text(
+                              entry.key,
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.lora(
+                                color: goldAccent.withValues(alpha: 0.85),
+                                fontSize: 8,
+                                fontWeight: FontWeight.w500,
+                                height: 1.3,
+                              ),
+                            ),
+                          ),
+                        );
+                      }
+                    }).toList(),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
