@@ -99,7 +99,9 @@ class _CartPageState extends State<CartPage> {
     // Launch LINE
     // URL Encode the message
     final encodedMessage = Uri.encodeComponent(sb.toString());
-    final url = Uri.parse('https://line.me/R/msg/text/?$encodedMessage');
+    final url = Uri.parse(
+      'https://line.me/R/oaMessage/@158butwc/?$encodedMessage',
+    );
 
     try {
       if (await canLaunchUrl(url)) {
