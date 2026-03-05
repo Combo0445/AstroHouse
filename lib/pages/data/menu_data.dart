@@ -608,12 +608,6 @@ final Map<String, dynamic> menuData = {
           "image": "assets/images/food/salad/Teriyaki chicken salad.jpg",
         },
         {
-          "name": "Salmon Avocado Salad",
-          "price": 300,
-          "description": "Olive oil & salt",
-          "image": "assets/images/food/salad/Salmon Avocado Salad.jpg",
-        },
-        {
           "name": "Salmon Sashimi thai spicy salad",
           "price": 280,
           "image": "assets/images/food/salad/salmon_thai_spicy.jpg",
@@ -1404,25 +1398,13 @@ final Map<String, dynamic> menuData = {
           "image": "assets/images/food/thai/Krapow seafood with Rice.jpg",
         },
         {
-          "name": "Thai-style Fried Omelette with Rice (ข้าวไข่เจียว)",
-          "price": 100,
-          "image":
-              "assets/images/food/thai/Thai-style Fried Omelette with Rice.jpg",
-        },
-        {
           "name": "Thai-style Fried Omelette with Minced Pork and Rice",
           "price": 120,
           "image":
               "assets/images/food/thai/Thai-style Fried Omelette with Minced Pork and Rice.jpg",
         },
         {
-          "name": "Thai-style Fried Omelette with Minced Pork",
-          "price": 120,
-          "image":
-              "assets/images/food/thai/Thai-style Fried Omelette with Minced Pork.jpg",
-        },
-        {
-          "name": "Thai-style Fried Omelette",
+          "name": "Thai-style Fried Omelette with Rice (ข้าวไข่เจียว)",
           "price": 100,
           "image": "assets/images/food/thai/Thai-style Fried Omelette.jpg",
         },
