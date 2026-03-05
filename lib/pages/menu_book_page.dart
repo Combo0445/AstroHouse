@@ -44,7 +44,6 @@ class _MenuBookPageState extends State<MenuBookPage> {
                 _buildWelcomeQRPage(),
                 _buildTOCPage(),
                 ...menuPages,
-                _buildLastPage(),
               ],
             ),
           ),
@@ -255,30 +254,6 @@ class _MenuBookPageState extends State<MenuBookPage> {
             ),
             const SizedBox(height: 10),
             const Icon(Icons.arrow_forward_ios, color: goldAccent, size: 16),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLastPage() {
-    return Container(
-      color: deepLeather,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.stars, color: goldAccent, size: 50),
-            const SizedBox(height: 20),
-            Text(
-              'ESTABLISHED 2024',
-              style: GoogleFonts.cinzel(color: goldAccent, fontSize: 12),
-            ),
-            const SizedBox(height: 30),
-            Text(
-              'THANK YOU',
-              style: GoogleFonts.cinzel(color: goldAccent, fontSize: 24),
-            ),
           ],
         ),
       ),
