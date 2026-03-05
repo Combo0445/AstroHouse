@@ -57,7 +57,25 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/
+    - assets/images/drinks/
+    - assets/images/food/breakfast/
+    - assets/images/food/salad/
+    - assets/images/food/sandwich/
+    - assets/images/food/roti/
+    - assets/images/food/pizza/
+    - assets/images/food/spaghetti/
+    - assets/images/food/gratin/
+    - assets/images/food/appetizer/
+    - assets/images/food/chorizo/
+    - assets/images/food/steak/
+    - assets/images/food/japanese/
+    - assets/images/food/thai/
+    - assets/images/food/toast/
+    - assets/images/dessert/toast/
+    - assets/images/dessert/waffle/
+    - assets/images/dessert/crepe/
+    - assets/images/dessert/pancake/
+    - assets/images/dessert/roti_banana/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

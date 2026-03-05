@@ -10,7 +10,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Cold", "price": 75},
             {"label": "Frappe", "price": 85},
           ],
-          "image": "assets/images/espresso.jpg",
+          "image": "assets/images/drinks/espresso.jpg",
         },
         {
           "name": "Cappuccino",
@@ -20,7 +20,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Cold", "price": 75},
             {"label": "Frappe", "price": 85},
           ],
-          "image": "assets/images/cappuccino.jpg",
+          "image": "assets/images/drinks/cappuccino.jpg",
         },
         {
           "name": "Latte",
@@ -30,7 +30,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Cold", "price": 75},
             {"label": "Frappe", "price": 85},
           ],
-          "image": "assets/images/latte.jpg",
+          "image": "assets/images/drinks/latte.jpg",
         },
         {
           "name": "Mocca",
@@ -40,7 +40,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Cold", "price": 75},
             {"label": "Frappe", "price": 85},
           ],
-          "image": "assets/images/mocca.jpg",
+          "image": "assets/images/drinks/mocca.jpg",
         },
         {
           "name": "Americano",
@@ -49,7 +49,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Hot", "price": 60},
             {"label": "Cold", "price": 65},
           ],
-          "image": "assets/images/americano.jpg",
+          "image": "assets/images/drinks/americano.jpg",
         },
         {
           "name": "Americano Orange",
@@ -57,7 +57,7 @@ final Map<String, dynamic> menuData = {
           "priceOptions": [
             {"label": "Cold", "price": 75},
           ],
-          "image": "assets/images/americano_orange.jpg",
+          "image": "assets/images/drinks/americano_orange.jpg",
         },
         {
           "name": "Americano Honey",
@@ -65,7 +65,7 @@ final Map<String, dynamic> menuData = {
           "priceOptions": [
             {"label": "Cold", "price": 75},
           ],
-          "image": "assets/images/americano_honey.jpg",
+          "image": "assets/images/drinks/americano_honey.jpg",
         },
         {
           "name": "Caramel Vanilla Latte",
@@ -74,7 +74,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Hot", "price": 75},
             {"label": "Cold", "price": 95},
           ],
-          "image": "assets/images/caramel_vanilla_latte.jpg",
+          "image": "assets/images/drinks/caramel_vanilla_latte.jpg",
         },
         {
           "name": "Caramel Machiato",
@@ -83,7 +83,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Hot", "price": 75},
             {"label": "Cold", "price": 95},
           ],
-          "image": "assets/images/caramel_machiato.jpg",
+          "image": "assets/images/drinks/caramel_machiato.jpg",
         },
         {
           "name": "Salted Caramel",
@@ -92,7 +92,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Hot", "price": 75},
             {"label": "Cold", "price": 95},
           ],
-          "image": "assets/images/salted_caramel.jpg",
+          "image": "assets/images/drinks/salted_caramel.jpg",
         },
         {"name": "Extra shot", "price": 25, "isTopping": true},
         {"name": "Whipping cream", "price": 25, "isTopping": true},
@@ -108,7 +108,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Cold", "price": 70},
             {"label": "Frappe", "price": 80},
           ],
-          "image": "assets/images/green_milk_tea.jpg",
+          "image": "assets/images/drinks/green_milk_tea.jpg",
         },
         {
           "name": "Thai Milk Tea",
@@ -118,7 +118,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Cold", "price": 70},
             {"label": "Frappe", "price": 80},
           ],
-          "image": "assets/images/thai_milk_tea.jpg",
+          "image": "assets/images/drinks/thai_milk_tea.jpg",
         },
         {
           "name": "Lemon Tea",
@@ -127,7 +127,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Hot", "price": 65},
             {"label": "Cold", "price": 70},
           ],
-          "image": "assets/images/lemon_tea.jpg",
+          "image": "assets/images/drinks/lemon_tea.jpg",
         },
       ],
       "Pot Selection": [
@@ -138,7 +138,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Hot", "price": 95},
             {"label": "Cold", "price": 95},
           ],
-          "image": "assets/images/english_breakfast_pot.jpg",
+          "image": "assets/images/drinks/english_breakfast_pot.jpg",
         },
         {
           "name": "Earlgrey",
@@ -147,7 +147,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Hot", "price": 95},
             {"label": "Cold", "price": 95},
           ],
-          "image": "assets/images/earlgrey_pot.jpg",
+          "image": "assets/images/drinks/earlgrey_pot.jpg",
         },
         {
           "name": "Peach Tea",
@@ -156,7 +156,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Hot", "price": 95},
             {"label": "Cold", "price": 95},
           ],
-          "image": "assets/images/peach_tea_pot.jpg",
+          "image": "assets/images/drinks/peach_tea_pot.jpg",
         },
         {
           "name": "Mango Strawberry Tea",
@@ -165,7 +165,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Hot", "price": 95},
             {"label": "Cold", "price": 95},
           ],
-          "image": "assets/images/mango_strawberry_tea_pot.jpg",
+          "image": "assets/images/drinks/mango_strawberry_tea_pot.jpg",
         },
         {
           "name": "Green Tea (Japanese Tea)",
@@ -174,7 +174,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Hot", "price": 95},
             {"label": "Cold", "price": 95},
           ],
-          "image": "assets/images/green_tea_pot.jpg",
+          "image": "assets/images/drinks/green_tea_pot.jpg",
         },
         {
           "name": "HOJICHA (Japanese Tea)",
@@ -183,7 +183,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Hot", "price": 95},
             {"label": "Cold", "price": 95},
           ],
-          "image": "assets/images/hojicha_pot.jpg",
+          "image": "assets/images/drinks/hojicha_pot.jpg",
         },
       ],
       "Lemonade Selection": [
@@ -195,7 +195,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Cold", "price": 70},
             {"label": "Frappe", "price": 80},
           ],
-          "image": "assets/images/lemonade.jpg",
+          "image": "assets/images/drinks/lemonade.jpg",
         },
         {
           "name": "Lemonade Honey",
@@ -205,7 +205,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Cold", "price": 75},
             {"label": "Frappe", "price": 85},
           ],
-          "image": "assets/images/lemonade_honey.jpg",
+          "image": "assets/images/drinks/lemonade_honey.jpg",
         },
       ],
     },
@@ -219,7 +219,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Cold", "price": 75},
             {"label": "Frappe", "price": 85},
           ],
-          "image": "assets/images/cocoa.jpg",
+          "image": "assets/images/drinks/cocoa.jpg",
         },
         {
           "name": "Cocoa Mint",
@@ -229,7 +229,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Cold", "price": 85},
             {"label": "Frappe", "price": 95},
           ],
-          "image": "assets/images/cocoa_mint.jpg",
+          "image": "assets/images/drinks/cocoa_mint.jpg",
         },
         {
           "name": "Milk Caramel",
@@ -239,7 +239,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Cold", "price": 80},
             {"label": "Frappe", "price": 90},
           ],
-          "image": "assets/images/milk_caramel.jpg",
+          "image": "assets/images/drinks/milk_caramel.jpg",
         },
         {
           "name": "Fresh Milk",
@@ -249,7 +249,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Cold", "price": 65},
             {"label": "Frappe", "price": 75},
           ],
-          "image": "assets/images/fresh_milk.jpg",
+          "image": "assets/images/drinks/fresh_milk.jpg",
         },
         {
           "name": "Pink Milk",
@@ -259,34 +259,34 @@ final Map<String, dynamic> menuData = {
             {"label": "Cold", "price": 65},
             {"label": "Frappe", "price": 75},
           ],
-          "image": "assets/images/pink_milk.jpg",
+          "image": "assets/images/drinks/pink_milk.jpg",
         },
       ],
       "Milk Shake Selection": [
         {
           "name": "Vanilla Shake",
           "price": 150,
-          "image": "assets/images/vanilla_shake.jpg",
+          "image": "assets/images/drinks/vanilla_shake.jpg",
         },
         {
           "name": "Strawberry Shake",
           "price": 150,
-          "image": "assets/images/strawberry_shake.jpg",
+          "image": "assets/images/drinks/strawberry_shake.jpg",
         },
         {
           "name": "Macadamia Nuts Shake",
           "price": 150,
-          "image": "assets/images/macadamia_shake.jpg",
+          "image": "assets/images/drinks/macadamia_shake.jpg",
         },
         {
           "name": "Japanese Green Tea Shake",
           "price": 150,
-          "image": "assets/images/greentea_shake.jpg",
+          "image": "assets/images/drinks/greentea_shake.jpg",
         },
         {
           "name": "Chocolate Milk Shake",
           "price": 150,
-          "image": "assets/images/chocolate_shake.jpg",
+          "image": "assets/images/drinks/chocolate_shake.jpg",
         },
       ],
     },
@@ -295,49 +295,49 @@ final Map<String, dynamic> menuData = {
         {
           "name": "Banana Smoothie",
           "price": 120,
-          "image": "assets/images/banana_smoothie.jpg",
+          "image": "assets/images/drinks/banana_smoothie.jpg",
         },
         {
           "name": "Watermelon Smoothie",
           "price": 120,
-          "image": "assets/images/watermelon_smoothie.jpg",
+          "image": "assets/images/drinks/watermelon_smoothie.jpg",
         },
         {
           "name": "Pineapple Smoothie",
           "price": 120,
-          "image": "assets/images/pineapple_smoothie.jpg",
+          "image": "assets/images/drinks/pineapple_smoothie.jpg",
         },
         {
           "name": "Strawberry Smoothie",
           "price": 120,
-          "image": "assets/images/strawberry_smoothie.jpg",
+          "image": "assets/images/drinks/strawberry_smoothie.jpg",
         },
         {
           "name": "Kiwi Smoothie",
           "price": 120,
-          "image": "assets/images/kiwi_smoothie.jpg",
+          "image": "assets/images/drinks/kiwi_smoothie.jpg",
         },
         {
           "name": "Blueberry Smoothie",
           "price": 120,
-          "image": "assets/images/blueberry_smoothie.jpg",
+          "image": "assets/images/drinks/blueberry_smoothie.jpg",
         },
         {
           "name": "Mango Smoothie",
           "price": 120,
-          "image": "assets/images/mango_smoothie.jpg",
+          "image": "assets/images/drinks/mango_smoothie.jpg",
         },
       ],
       "Yogurt Smoothie Selection": [
         {
           "name": "Mango Yogurt Smoothie",
           "price": 135,
-          "image": "assets/images/mango_yogurt_smoothie.jpg",
+          "image": "assets/images/drinks/mango_yogurt_smoothie.jpg",
         },
         {
           "name": "Strawberry Yogurt Smoothie",
           "price": 135,
-          "image": "assets/images/strawberry_yogurt_smoothie.jpg",
+          "image": "assets/images/drinks/strawberry_yogurt_smoothie.jpg",
         },
       ],
     },
@@ -346,62 +346,74 @@ final Map<String, dynamic> menuData = {
         {
           "name": "Lychee Peach soda",
           "price": 95,
-          "image": "assets/images/lychee_peach_soda.jpg",
+          "image": "assets/images/drinks/lychee_peach_soda.jpg",
         },
         {
           "name": "Peach soda",
           "price": 95,
-          "image": "assets/images/peach_soda.jpg",
+          "image": "assets/images/drinks/peach_soda.jpg",
         },
         {
           "name": "Strawberry soda",
           "price": 95,
-          "image": "assets/images/strawberry_soda.jpg",
+          "image": "assets/images/drinks/strawberry_soda.jpg",
         },
         {
           "name": "Strawberry Mojito soda",
           "price": 95,
-          "image": "assets/images/strawberry_mojito_soda.jpg",
+          "image": "assets/images/drinks/strawberry_mojito_soda.jpg",
         },
         {
           "name": "Lime soda",
           "price": 95,
-          "image": "assets/images/lime_soda.jpg",
+          "image": "assets/images/drinks/lime_soda.jpg",
         },
         {
           "name": "Blue Hawai",
           "price": 95,
-          "image": "assets/images/blue_hawai.jpg",
+          "image": "assets/images/drinks/blue_hawai.jpg",
         },
         {
           "name": "Lychee soda",
           "price": 95,
-          "image": "assets/images/lychee_soda.jpg",
+          "image": "assets/images/drinks/lychee_soda.jpg",
         },
         {
           "name": "Green apple soda",
           "price": 95,
-          "image": "assets/images/green_apple_soda.jpg",
+          "image": "assets/images/drinks/green_apple_soda.jpg",
         },
         {
           "name": "Bubble gum soda",
           "price": 95,
-          "image": "assets/images/bubble_gum_soda.jpg",
+          "image": "assets/images/drinks/bubble_gum_soda.jpg",
         },
       ],
     },
     "Soft Drink": {
       "Soft Drink Selection": [
-        {"name": "Cola", "price": 35, "image": "assets/images/cola.jpg"},
-        {"name": "Cola 0", "price": 35, "image": "assets/images/cola_zero.jpg"},
-        {"name": "Soda", "price": 60, "image": "assets/images/soda.jpg"},
-        {"name": "Sprite", "price": 35, "image": "assets/images/sprite.jpg"},
+        {"name": "Cola", "price": 35, "image": "assets/images/drinks/cola.jpg"},
+        {
+          "name": "Cola 0",
+          "price": 35,
+          "image": "assets/images/drinks/cola_zero.jpg",
+        },
+        {"name": "Soda", "price": 60, "image": "assets/images/drinks/soda.jpg"},
+        {
+          "name": "Sprite",
+          "price": 35,
+          "image": "assets/images/drinks/sprite.jpg",
+        },
         {
           "name": "Schweppes lime",
           "price": 35,
-          "image": "assets/images/schweppes_lime.jpg",
+          "image": "assets/images/drinks/schweppes_lime.jpg",
         },
-        {"name": "Water", "price": 25, "image": "assets/images/water.jpg"},
+        {
+          "name": "Water",
+          "price": 25,
+          "image": "assets/images/drinks/water.jpg",
+        },
       ],
     },
     "Ice Cream": {
@@ -409,34 +421,34 @@ final Map<String, dynamic> menuData = {
         {
           "name": "Vanilla",
           "price": 75,
-          "image": "assets/images/vanilla_icecream.jpg",
+          "image": "assets/images/drinks/vanilla_icecream.jpg",
         },
         {
           "name": "Strawberry",
           "price": 75,
-          "image": "assets/images/strawberry_icecream.jpg",
+          "image": "assets/images/drinks/strawberry_icecream.jpg",
         },
         {
           "name": "Macadamia Nuts",
           "price": 75,
-          "image": "assets/images/macadamia_icecream.jpg",
+          "image": "assets/images/drinks/macadamia_icecream.jpg",
         },
         {
           "name": "Green Tea",
           "price": 75,
-          "image": "assets/images/greentea_icecream.jpg",
+          "image": "assets/images/drinks/greentea_icecream.jpg",
         },
         {
           "name": "Chocolate",
           "price": 75,
-          "image": "assets/images/chocolate_icecream.jpg",
+          "image": "assets/images/drinks/chocolate_icecream.jpg",
         },
       ],
       "Affogato": [
         {
           "name": "Ice Cream Affogato (Espresso)",
           "price": 150,
-          "image": "assets/images/affogato.jpg",
+          "image": "assets/images/drinks/affogato.jpg",
         },
       ],
     },
@@ -446,61 +458,61 @@ final Map<String, dynamic> menuData = {
           "name": "Apple Ade",
           "price": 110,
           "description": "Apple + Passion Fruit + Pineapple",
-          "image": "assets/images/apple_ade.jpg",
+          "image": "assets/images/drinks/apple_ade.jpg",
         },
         {
           "name": "Energizer",
           "price": 110,
           "description": "Green Apple + Carrot + Pineapple",
-          "image": "assets/images/energizer.jpg",
+          "image": "assets/images/drinks/energizer.jpg",
         },
         {
           "name": "Blood Booster",
           "price": 110,
           "description": "Carrot + Celery + Guava + Beetroot",
-          "image": "assets/images/blood_booster.jpg",
+          "image": "assets/images/drinks/blood_booster.jpg",
         },
         {
           "name": "Lovely Pink",
           "price": 110,
           "description": "Apple + Carrot + Beetroot",
-          "image": "assets/images/lovely_pink.jpg",
+          "image": "assets/images/drinks/lovely_pink.jpg",
         },
         {
           "name": "Refresh",
           "price": 110,
           "description": "Apple + Green Apple + Finger root + Lime Ginger",
-          "image": "assets/images/refresh.jpg",
+          "image": "assets/images/drinks/refresh.jpg",
         },
         {
           "name": "Red-O",
           "price": 110,
           "description": "Pineapple + Lime + Tomato",
-          "image": "assets/images/red_o.jpg",
+          "image": "assets/images/drinks/red_o.jpg",
         },
         {
           "name": "Paradise",
           "price": 110,
           "description": "Apple + Carrot + Passion Fruit",
-          "image": "assets/images/paradise.jpg",
+          "image": "assets/images/drinks/paradise.jpg",
         },
         {
           "name": "Power Up",
           "price": 110,
           "description": "Apple + Pineapple + Cucumber",
-          "image": "assets/images/power_up.jpg",
+          "image": "assets/images/drinks/power_up.jpg",
         },
         {
           "name": "Helthy Green",
           "price": 110,
           "description": "Green apple + Lime + Celery + kale",
-          "image": "assets/images/healthy_green.jpg",
+          "image": "assets/images/drinks/healthy_green.jpg",
         },
         {
           "name": "Heart Beet",
           "price": 110,
           "description": "Apple + Beetroot + Lime pineapple",
-          "image": "assets/images/heart_beet.jpg",
+          "image": "assets/images/drinks/heart_beet.jpg",
         },
       ],
     },
@@ -513,35 +525,35 @@ final Map<String, dynamic> menuData = {
           "price": 229,
           "description": "Hot Coffee & Orange Juice",
           "alacarte": 180,
-          "image": "assets/images/breakfast_a.jpg",
+          "image": "assets/images/food/breakfast/breakfast_a.jpg",
         },
         {
           "name": "Astro Breakfast B",
           "price": 229,
           "description": "Hot Coffee & Orange Juice",
           "alacarte": 180,
-          "image": "assets/images/breakfast_b.jpg",
+          "image": "assets/images/food/breakfast/breakfast_b.jpg",
         },
         {
           "name": "Astro Breakfast C",
           "price": 229,
           "description": "Hot Coffee & Orange Juice",
           "alacarte": 180,
-          "image": "assets/images/breakfast_c.jpg",
+          "image": "assets/images/food/breakfast/breakfast_c.jpg",
         },
         {
           "name": "Astro Breakfast D",
           "price": 285,
           "description": "Hot Coffee & Orange Juice",
           "alacarte": 255,
-          "image": "assets/images/breakfast_d.jpg",
+          "image": "assets/images/food/breakfast/breakfast_d.jpg",
         },
         {
           "name": "Astro Breakfast F",
           "price": 285,
           "description": "Hot Coffee & Orange Juice",
           "alacarte": 255,
-          "image": "assets/images/breakfast_f.jpg",
+          "image": "assets/images/food/breakfast/breakfast_f.jpg",
         },
       ],
       "Topping": [
@@ -558,13 +570,13 @@ final Map<String, dynamic> menuData = {
           "price": 150,
           "description":
               "Choose your dressing: Olive oil & salt, Caesar dressing, Olive oil, Sesame dressing",
-          "image": "assets/images/simple_salad.jpg",
+          "image": "assets/images/food/salad/simple_salad.jpg",
         },
         {
           "name": "Honey mustard chicken salad",
           "price": 250,
           "description": "Honey mustard dressing",
-          "image": "assets/images/honey_mustard_chicken_salad.jpg",
+          "image": "assets/images/food/salad/Honey mustard chicken salad.jpg",
         },
         {
           "name": "Caesar salad",
@@ -575,42 +587,42 @@ final Map<String, dynamic> menuData = {
             {"label": "Chicken", "price": 200},
             {"label": "Bacon", "price": 250},
           ],
-          "image": "assets/images/caesar_salad.jpg",
+          "image": "assets/images/food/salad/Caesar salad.jpg",
         },
         {
           "name": "Salmon & Avocado Salad",
           "price": 325,
           "description": "Caesar dressing",
-          "image": "assets/images/salmon_avocado_salad.jpg",
+          "image": "assets/images/food/salad/Salmon & Avocado Salad.jpg",
         },
         {
           "name": "Avocado & Strawberry Salad",
           "price": 265,
           "description": "Honey mustard dressing",
-          "image": "assets/images/avocado_strawberry_salad.jpg",
+          "image": "assets/images/food/salad/avocado_strawberry_salad.jpg",
         },
         {
           "name": "Teriyaki chicken salad",
           "price": 250,
           "description": "Olive oil & salt, mayonnaise",
-          "image": "assets/images/teriyaki_chicken_salad.jpg",
+          "image": "assets/images/food/salad/Teriyaki chicken salad.jpg",
         },
         {
           "name": "Salmon Avocado Salad",
           "price": 300,
           "description": "Olive oil & salt",
-          "image": "assets/images/salmon_avocado_salad_2.jpg",
+          "image": "assets/images/food/salad/Salmon Avocado Salad.jpg",
         },
         {
           "name": "Salmon Sashimi thai spicy salad",
           "price": 280,
-          "image": "assets/images/salmon_thai_spicy.jpg",
+          "image": "assets/images/food/salad/salmon_thai_spicy.jpg",
         },
         {
           "name": "korean barbecue salad",
           "price": 280,
           "description": "Gochujang sauce",
-          "image": "assets/images/korean_barbecue_salad.jpg",
+          "image": "assets/images/food/salad/korean barbecue salad.jpg",
         },
       ],
       "Topping": [
@@ -628,12 +640,12 @@ final Map<String, dynamic> menuData = {
         {
           "name": "Tuna melt",
           "price": 175,
-          "image": "assets/images/tuna_melt.jpg",
+          "image": "assets/images/food/sandwich/Tuna melt.jpg",
         },
         {
           "name": "Avocado Bacon melt",
           "price": 195,
-          "image": "assets/images/avocado_bacon_melt.jpg",
+          "image": "assets/images/food/sandwich/Avocado Bacon melt.jpg",
         },
         {
           "name": "Sandwich Egg",
@@ -643,17 +655,17 @@ final Map<String, dynamic> menuData = {
             {"label": "Egg Hot", "price": 125},
             {"label": "Ham & Egg Hot", "price": 145},
           ],
-          "image": "assets/images/sandwich_egg.jpg",
+          "image": "assets/images/food/sandwich/Sandwich Egg.jpg",
         },
         {
           "name": "Ham & Cheese Hot Sandwich",
           "price": 165,
-          "image": "assets/images/ham_cheese_sandwich.jpg",
+          "image": "assets/images/food/sandwich/Ham & Cheese Hot Sandwich.jpg",
         },
         {
           "name": "Teriyaki Hot Sandwich",
           "price": 150,
-          "image": "assets/images/teriyaki_sandwich.jpg",
+          "image": "assets/images/food/sandwich/Teriyaki Hot Sandwich.jpg",
         },
       ],
       "Topping": [
@@ -668,32 +680,32 @@ final Map<String, dynamic> menuData = {
         {
           "name": "Tuna & mozzarella cheese toast",
           "price": 165,
-          "image": "assets/images/tuna_cheese_toast.jpg",
+          "image": "assets/images/food/toast/tuna_cheese_toast.jpg",
         },
         {
           "name": "Ham & mozzarella cheese toast",
           "price": 180,
-          "image": "assets/images/ham_cheese_toast.jpg",
+          "image": "assets/images/food/toast/ham_cheese_toast.jpg",
         },
         {
           "name": "Salami Pizza toast",
           "price": 150,
-          "image": "assets/images/salami_pizza_toast.jpg",
+          "image": "assets/images/food/toast/salami_pizza_toast.jpg",
         },
         {
           "name": "Arabiki sausage Pizza toast",
           "price": 150,
-          "image": "assets/images/arabiki_sausage_pizza_toast.jpg",
+          "image": "assets/images/food/toast/arabiki_sausage_pizza_toast.jpg",
         },
         {
           "name": "Margarita Pizza toast",
           "price": 150,
-          "image": "assets/images/margarita_pizza_toast.jpg",
+          "image": "assets/images/food/toast/margarita_pizza_toast.jpg",
         },
         {
           "name": "Ham Pizza toast",
           "price": 150,
-          "image": "assets/images/ham_pizza_toast.jpg",
+          "image": "assets/images/food/toast/ham_pizza_toast.jpg",
         },
       ],
       "Topping": [
@@ -708,22 +720,22 @@ final Map<String, dynamic> menuData = {
         {
           "name": "Roti Tuna",
           "price": 150,
-          "image": "assets/images/roti_tuna.jpg",
+          "image": "assets/images/food/roti/roti_tuna.jpg",
         },
         {
           "name": "Roti mozzarella cheese",
           "price": 150,
-          "image": "assets/images/roti_cheese.jpg",
+          "image": "assets/images/food/roti/Roti mozzarella cheese.jpg",
         },
         {
           "name": "Roti Beef & mozzarella cheese",
           "price": 175,
-          "image": "assets/images/roti_beef_cheese.jpg",
+          "image": "assets/images/food/roti/Roti Beef & mozzarella cheese.jpg",
         },
         {
           "name": "Roti Ham & mozzarella cheese",
           "price": 175,
-          "image": "assets/images/roti_ham_cheese.jpg",
+          "image": "assets/images/food/roti/Roti Ham & mozzarella cheese.jpg",
         },
       ],
       "Topping": [
@@ -738,32 +750,32 @@ final Map<String, dynamic> menuData = {
         {
           "name": "Margarita Pizza",
           "price": 265,
-          "image": "assets/images/margarita_pizza.jpg",
+          "image": "assets/images/food/pizza/margarita_pizza.jpg",
         },
         {
           "name": "Bacon Pizza",
           "price": 350,
-          "image": "assets/images/bacon_pizza.jpg",
+          "image": "assets/images/food/pizza/Bacon Pizza.jpg",
         },
         {
           "name": "Salami Pizza",
           "price": 380,
-          "image": "assets/images/salami_pizza_large.jpg",
+          "image": "assets/images/food/pizza/Salami Pizza.jpg",
         },
         {
           "name": "Salmon Pizza",
           "price": 390,
-          "image": "assets/images/salmon_pizza.jpg",
+          "image": "assets/images/food/pizza/Salmon Pizza.jpg",
         },
         {
           "name": "Ham Pizza",
           "price": 350,
-          "image": "assets/images/ham_pizza_large.jpg",
+          "image": "assets/images/food/pizza/Ham Pizza.jpg",
         },
         {
           "name": "Roti Pizza mozzarella cheese",
           "price": 220,
-          "image": "assets/images/roti_pizza_cheese.jpg",
+          "image": "assets/images/food/pizza/Roti Pizza mozzarella cheese.jpg",
         },
       ],
       "Topping": [
@@ -776,52 +788,57 @@ final Map<String, dynamic> menuData = {
         {
           "name": "Pomodoro with bacon (Tomato sauce)",
           "price": 235,
-          "image": "assets/images/spaghetti_pomodoro.jpg",
+          "image":
+              "assets/images/food/spaghetti/Pomodoro with bacon (Tomato sauce).jpg",
         },
         {
           "name": "Arrabiata with bacon",
           "price": 235,
-          "image": "assets/images/spaghetti_arrabiata.jpg",
+          "image": "assets/images/food/spaghetti/Arrabiata with bacon.jpg",
         },
         {
           "name": "Spicy garlic tomato sauce with bacon",
           "price": 235,
-          "image": "assets/images/spaghetti_spicy_garlic_tomato.jpg",
+          "image":
+              "assets/images/food/spaghetti/Spicy garlic tomato sauce with bacon.jpg",
         },
         {
           "name": "Spicy Salmon tomato cream Spaghetti",
           "price": 250,
-          "image": "assets/images/spaghetti_spicy_salmon_cream.jpg",
+          "image":
+              "assets/images/food/spaghetti/Spicy Salmon tomato cream Spaghetti.jpg",
         },
         {
           "name": "Shrimp sauce Spaghetti",
           "price": 250,
-          "image": "assets/images/spaghetti_shrimp_sauce.jpg",
+          "image": "assets/images/food/spaghetti/Shrimp sauce Spaghetti.jpg",
         },
         {
           "name": "Spicy Bacon tomato cream Spaghetti",
           "price": 250,
-          "image": "assets/images/spaghetti_spicy_bacon_cream.jpg",
+          "image":
+              "assets/images/food/spaghetti/spaghetti_spicy_bacon_cream.jpg",
         },
         {
           "name": "Spaghetti Thai Spicy seafood with herbs",
           "price": 250,
-          "image": "assets/images/spaghetti_thai_spicy_seafood.jpg",
+          "image":
+              "assets/images/food/spaghetti/Spaghetti Thai Spicy seafood with herbs.jpg",
         },
         {
           "name": "Bacon peperoncino",
           "price": 225,
-          "image": "assets/images/spaghetti_bacon_peperoncino.jpg",
+          "image": "assets/images/food/spaghetti/Bacon peperoncino.jpg",
         },
         {
           "name": "Tuna Pasta Japanese style",
           "price": 250,
-          "image": "assets/images/spaghetti_tuna_japanese.jpg",
+          "image": "assets/images/food/spaghetti/spaghetti_tuna_japanese.jpg",
         },
         {
           "name": "Bacon Carbonara",
           "price": 250,
-          "image": "assets/images/spaghetti_carbonara.jpg",
+          "image": "assets/images/food/spaghetti/spaghetti_carbonara.jpg",
         },
       ],
       "Topping": [
@@ -835,12 +852,12 @@ final Map<String, dynamic> menuData = {
         {
           "name": "Shrimp Gratin",
           "price": 280,
-          "image": "assets/images/shrimp_gratin.jpg",
+          "image": "assets/images/food/gratin/shrimp_gratin.jpg",
         },
         {
           "name": "Bacon Spinach Gratin",
           "price": 265,
-          "image": "assets/images/bacon_spinach_gratin.jpg",
+          "image": "assets/images/food/gratin/bacon_spinach_gratin.jpg",
         },
       ],
       "Topping": [
@@ -853,48 +870,55 @@ final Map<String, dynamic> menuData = {
         {
           "name": "Fries chicken wing",
           "price": 165,
-          "image": "assets/images/fries_chicken_wing.jpg",
+          "image": "assets/images/food/appetizer/Fries chicken wing.jpg",
         },
         {
           "name": "Ham & Mozzarella cheese Spring roll",
           "price": 165,
-          "image": "assets/images/ham_cheese_spring_roll.jpg",
+          "image":
+              "assets/images/food/appetizer/Ham & Mozzarella cheese Spring roll.jpg",
         },
         {
           "name": "Pork Spring roll",
           "price": 150,
-          "image": "assets/images/pork_spring_roll.jpg",
+          "image": "assets/images/food/appetizer/Pork Spring roll.jpg",
         },
         {
           "name": "Vegetable Spring roll",
           "price": 150,
-          "image": "assets/images/veg_spring_roll.jpg",
+          "image": "assets/images/food/appetizer/Vegetable Spring roll.jpg",
         },
         {
           "name": "Fish finger",
           "price": 120,
-          "image": "assets/images/fish_finger.jpg",
+          "image": "assets/images/food/appetizer/Fish finger.jpg",
         },
-        {"name": "Nugget", "price": 125, "image": "assets/images/nugget.jpg"},
+        {
+          "name": "Nugget",
+          "price": 125,
+          "image": "assets/images/food/appetizer/Nugget.jpg",
+        },
         {
           "name": "Bacon & mozzarella cheese French fries",
           "price": 180,
-          "image": "assets/images/bacon_cheese_fries.jpg",
+          "image":
+              "assets/images/food/appetizer/Bacon & mozzarella cheese French fries.jpg",
         },
         {
           "name": "Parmesan cheese French fries",
           "price": 150,
-          "image": "assets/images/parmesan_fries.jpg",
+          "image":
+              "assets/images/food/appetizer/Parmesan cheese French fries.jpg",
         },
         {
           "name": "French fries",
           "price": 120,
-          "image": "assets/images/french_fries.jpg",
+          "image": "assets/images/food/appetizer/French fries.jpg",
         },
         {
           "name": "Arabiki Sausage",
           "price": 150,
-          "image": "assets/images/arabiki_sausage_appetizer.jpg",
+          "image": "assets/images/food/appetizer/arabiki_sausage.jpg",
         },
         {
           "name": "Fried Gyoza",
@@ -904,13 +928,13 @@ final Map<String, dynamic> menuData = {
             {"label": "6 piece", "price": 140},
             {"label": "9 piece", "price": 180},
           ],
-          "image": "assets/images/fried_gyoza.jpg",
+          "image": "assets/images/food/appetizer/Fried Gyoza.jpg",
         },
         {
           "name": "Steamed Gyoza",
           "description": "6 piece 140฿",
           "price": 140,
-          "image": "assets/images/steamed_gyoza.jpg",
+          "image": "assets/images/food/appetizer/Steamed Gyoza.jpg",
         },
       ],
       "Topping": [
@@ -924,17 +948,19 @@ final Map<String, dynamic> menuData = {
         {
           "name": "Chorizo & herb sausage",
           "price": 295,
-          "image": "assets/images/chorizo_herb.jpg",
+          "image": "assets/images/food/chorizo/Chorizo & herb sausage.jpg",
         },
         {
           "name": "Chorizo Sausage with Fried Potatoes",
           "price": 295,
-          "image": "assets/images/chorizo_potatoes.jpg",
+          "image":
+              "assets/images/food/chorizo/Chorizo Sausage with Fried Potatoes.jpg",
         },
         {
           "name": "Herb Sausage with German Fried Potatoes",
           "price": 295,
-          "image": "assets/images/herb_sausage_potatoes.jpg",
+          "image":
+              "assets/images/food/chorizo/Herb Sausage with German Fried Potatoes.jpg",
         },
       ],
     },
@@ -943,84 +969,95 @@ final Map<String, dynamic> menuData = {
         {
           "name": "Chicken steak with Bacon Garlic butter",
           "price": 265,
-          "image": "assets/images/chicken_steak_bacon.jpg",
+          "image": "assets/images/food/steak/chicken_steak_bacon.jpg",
         },
         {
           "name": "Chicken steak with Garlic butter",
           "price": 250,
-          "image": "assets/images/chicken_steak_garlic.jpg",
+          "image":
+              "assets/images/food/steak/Chicken steak with Garlic butter.jpg",
         },
         {
           "name": "Chicken steak with Garlic Tomato sauce",
           "price": 265,
-          "image": "assets/images/chicken_steak_tomato.jpg",
+          "image":
+              "assets/images/food/steak/Chicken steak with Garlic Tomato sauce.jpg",
         },
         {
           "name": "Chicken steak with Mozzarella cheese Tomato sauce",
           "price": 280,
-          "image": "assets/images/chicken_steak_cheese.jpg",
+          "image":
+              "assets/images/food/steak/Chicken steak with Mozzarella cheese Tomato sauce.jpg",
         },
         {
           "name": "Chicken steak with spicy Garlic tomato sauce",
           "price": 265,
           "description": "+Topping cheese 15฿",
-          "image": "assets/images/chicken_steak_spicy.jpg",
+          "image":
+              "assets/images/food/steak/Chicken steak with spicy Garlic tomato sauce.jpg",
         },
         {
           "name": "Chicken steak with Teriyaki sauce",
           "price": 200,
-          "image": "assets/images/chicken_steak_teriyaki.jpg",
+          "image":
+              "assets/images/food/steak/Chicken steak with Teriyaki sauce.jpg",
         },
       ],
       "Pork chop": [
         {
           "name": "Pork chop Mushroom cream sauce",
           "price": 385,
-          "image": "assets/images/pork_chop_mushroom.jpg",
+          "image":
+              "assets/images/food/steak/Pork chop Mushroom cream sauce.jpg",
         },
         {
           "name": "Pork chop garlic butter sauce",
           "price": 385,
-          "image": "assets/images/pork_chop_garlic.jpg",
+          "image": "assets/images/food/steak/Pork chop garlic butter sauce.jpg",
         },
         {
           "name": "Pork chop peper sauce",
           "price": 385,
-          "image": "assets/images/pork_chop_peper.jpg",
+          "image": "assets/images/food/steak/Pork chop peper sauce.jpg",
         },
       ],
       "Salmon steak": [
         {
           "name": "Salmon Meuniere garlic butter sauce",
           "price": 325,
-          "image": "assets/images/salmon_garlic.jpg",
+          "image":
+              "assets/images/food/steak/Salmon Meuniere garlic butter sauce.jpg",
         },
         {
           "name": "Aburi cheese salmon with teriyaki sauce",
           "price": 345,
-          "image": "assets/images/salmon_aburi.jpg",
+          "image":
+              "assets/images/food/steak/Aburi cheese salmon with teriyaki sauce.jpg",
         },
         {
           "name": "Salmon Meuniere with Mushroom Cream sauce",
           "price": 325,
-          "image": "assets/images/salmon_mushroom.jpg",
+          "image":
+              "assets/images/food/steak/Salmon Meunierewith Mushroom Cream sauce.jpg",
         },
         {
           "name": "Salmon teriyaki sauce or salt",
           "price": 295,
-          "image": "assets/images/salmon_teriyaki.jpg",
+          "image": "assets/images/food/steak/Salmon teriyaki sauce or salt.jpg",
         },
       ],
       "Skillet": [
         {
           "name": "Skillet Salmon with spicy tomato cream sauce",
           "price": 350,
-          "image": "assets/images/skillet_salmon.jpg",
+          "image":
+              "assets/images/food/steak/Skillet Salmon with spicy tomato cream sauce.jpg",
         },
         {
           "name": "Skillet Chicken with spicy tomato cream sauce",
           "price": 285,
-          "image": "assets/images/skillet_chicken.jpg",
+          "image":
+              "assets/images/food/steak/Skillet Chicken with spicy tomato cream sauce.jpg",
         },
       ],
       "Topping": [
@@ -1039,131 +1076,148 @@ final Map<String, dynamic> menuData = {
         {
           "name": "Chicken with Garlic rice",
           "price": 245,
-          "image": "assets/images/chicken_garlic_rice.jpg",
+          "image": "assets/images/food/japanese/Chicken with Garlic rice.jpg",
         },
         {
           "name": "Australian Beef with Garlic rice",
           "price": 285,
-          "image": "assets/images/beef_garlic_rice.jpg",
+          "image":
+              "assets/images/food/japanese/Australian Beef with Garlic rice.jpg",
         },
         {
           "name": "Arabiki sausage with Garlic rice",
           "price": 245,
-          "image": "assets/images/arabiki_garlic_rice.jpg",
+          "image":
+              "assets/images/food/japanese/Arabiki sausage with Garlic rice.jpg",
         },
         {
           "name": "Teriyaki salmon with Garlic rice",
           "price": 295,
-          "image": "assets/images/salmon_garlic_rice.jpg",
+          "image":
+              "assets/images/food/japanese/Teriyaki salmon with Garlic rice.jpg",
         },
       ],
       "Curry rice": [
         {
           "name": "Curry rice",
           "price": 180,
-          "image": "assets/images/curry_rice.jpg",
+          "image": "assets/images/food/japanese/Curry rice.jpg",
         },
         {
           "name": "Cheese Curry rice",
           "price": 200,
-          "image": "assets/images/cheese_curry_rice.jpg",
+          "image": "assets/images/food/japanese/Cheese Curry rice.jpg",
         },
         {
           "name": "Slide Beef Curry rice",
           "price": 250,
-          "image": "assets/images/beef_curry_rice.jpg",
+          "image": "assets/images/food/japanese/Slide Beef Curry rice.jpg",
         },
         {
           "name": "Arabiki Sausage Curry rice",
           "price": 235,
-          "image": "assets/images/arabiki_curry_rice.jpg",
+          "image": "assets/images/food/japanese/Arabiki Sausage Curry rice.jpg",
         },
       ],
       "Sashimi & Aburi bowl": [
         {
           "name": "Sashimi salmon mini Rice bowl",
           "price": 275,
-          "image": "assets/images/sashimi_salmon_bowl.jpg",
+          "image":
+              "assets/images/food/japanese/Sashimi salmon mini Rice bowl.jpg",
         },
         {
           "name": "Sashimi salmon with Avocado mini Rice bowl",
           "price": 295,
-          "image": "assets/images/sashimi_avocado_bowl.jpg",
+          "image":
+              "assets/images/food/japanese/Sashimi salmon with Avocado mini Rice bowl.jpg",
         },
         {
           "name": "Aburi Salmon mini rice bowl",
           "price": 275,
-          "image": "assets/images/aburi_salmon_bowl.jpg",
+          "image":
+              "assets/images/food/japanese/Aburi Salmon mini rice bowl.jpg",
         },
         {
           "name": "Aburi Salmon with Avocado mini rice bowl",
           "price": 295,
-          "image": "assets/images/aburi_avocado_bowl.jpg",
+          "image":
+              "assets/images/food/japanese/Aburi Salmon with Avocado mini rice bowl.jpg",
         },
         {
           "name": "Yakiniku kimchi rice bowl",
           "price": 195,
-          "image": "assets/images/yakiniku_kimchi_bowl.jpg",
+          "image": "assets/images/food/japanese/Yakiniku kimchi rice bowl.jpg",
         },
         {
           "name": "Yakiniku rice bowl",
           "price": 180,
-          "image": "assets/images/yakiniku_bowl.jpg",
+          "image": "assets/images/food/japanese/Yakiniku rice bowl.jpg",
         },
         {
           "name": "Unagi rice bowl",
           "price": 385,
-          "image": "assets/images/unagi_bowl.jpg",
+          "image": "assets/images/food/japanese/Unagi rice bowl.jpg",
         },
       ],
       "Japanese noodle": [
         {
           "name": "shin ramen",
           "price": 180,
-          "image": "assets/images/shin_ramen.jpg",
+          "image": "assets/images/food/japanese/shin ramen.jpg",
         },
-        {"name": "Udon", "price": 165, "image": "assets/images/udon.jpg"},
+        {
+          "name": "Udon",
+          "price": 165,
+          "image": "assets/images/food/japanese/Udon.jpg",
+        },
         {
           "name": "Tanuki Udon",
           "price": 165,
-          "image": "assets/images/tanuki_udon.jpg",
+          "image": "assets/images/food/japanese/Tanuki Udon.jpg",
         },
         {
           "name": "Niku Udon",
           "price": 225,
-          "image": "assets/images/niku_udon.jpg",
+          "image": "assets/images/food/japanese/Niku Udon.jpg",
         },
         {
           "name": "Kaki age Udon",
           "price": 225,
-          "image": "assets/images/kakiage_udon.jpg",
+          "image": "assets/images/food/japanese/Kaki age Udon.jpg",
         },
         {
           "name": "Cold soup Udon",
           "price": 165,
-          "image": "assets/images/cold_soup_udon.jpg",
+          "image": "assets/images/food/japanese/Cold soup Udon.jpg",
         },
         {
           "name": "Zaru Udon",
           "price": 165,
-          "image": "assets/images/zaru_udon.jpg",
+          "image": "assets/images/food/japanese/Zaru Udon.jpg",
         },
         {
           "name": "Zaru soba",
           "price": 165,
-          "image": "assets/images/zaru_soba.jpg",
+          "image": "assets/images/food/japanese/Zaru soba.jpg",
         },
       ],
       "Bento": [
         {
           "name": "Salmon with Yakiniku Bento (Teriyaki / salt)",
           "price": 350,
-          "image": "assets/images/salmon_yakiniku_bento.jpg",
+          "image": "assets/images/food/japanese/Salmon with Yakiniku Bento.jpg",
         },
         {
           "name": "Salmon with Chicken karaage Bento (Teriyaki / salt)",
           "price": 350,
-          "image": "assets/images/salmon_karaage_bento.jpg",
+          "image":
+              "assets/images/food/japanese/Salmon with Chicken karaage Bento.jpg",
+        },
+        {
+          "name": "Unagi with Yakiniku Bento",
+          "price": 450,
+          "image": "assets/images/food/japanese/Unagi with Yakiniku Bento.jpg",
         },
       ],
     },
@@ -1172,7 +1226,7 @@ final Map<String, dynamic> menuData = {
         {
           "name": "Papaya Salad (ส้มตำไทย)",
           "price": 125,
-          "image": "assets/images/papaya_salad.jpg",
+          "image": "assets/images/food/salad/Papaya Salad.jpg",
         },
         {
           "name": "Spicy noodle salad (ยำวุ้นเส้น)",
@@ -1181,60 +1235,70 @@ final Map<String, dynamic> menuData = {
             {"label": "vietnamese sausage(หมูยอ)", "price": 175},
             {"label": "seafood(ทะเล)", "price": 200},
           ],
-          "image": "assets/images/spicy_noodle_salad.jpg",
+          "image": "assets/images/food/thai/Spicy noodle salad.jpg",
         },
         {
           "name": "Spicy shrimp papaya salad (ตำกุ้งสด)",
           "price": 180,
-          "image": "assets/images/shrimp_papaya_salad.jpg",
+          "image": "assets/images/food/salad/Spicy shrimp papaya salad.jpg",
         },
         {
           "name": "Spicy mince pork salad (ลาบหมู)",
           "price": 180,
-          "image": "assets/images/larb_moo.jpg",
+          "image": "assets/images/food/salad/Spicy mince pork salad.jpg",
         },
         {
           "name": "Spicy seafood salad (ยำทะเล)",
           "price": 250,
-          "image": "assets/images/seafood_salad.jpg",
+          "image": "assets/images/food/salad/Spicy seafood salad.jpg",
         },
       ],
       "Thai Traditional": [
         {
           "name": "Thai Grilled pork neck with Thai spicy sauce (น้ำตกหมู)",
           "price": 195,
-          "image": "assets/images/namtok_moo.jpg",
+          "image":
+              "assets/images/food/thai/Thai Grilled pork neck with Thai spicy sauce.jpg",
         },
         {
           "name": "Grilled Chicken with Thai spicy sauce (ไก่ย่างจิ้มแจ่ว)",
           "price": 195,
-          "image": "assets/images/grilled_chicken_thai.jpg",
+          "image":
+              "assets/images/food/thai/Grilled Chicken with Thai spicy sauce.jpg",
         },
         {
           "name": "Thai Grilled pork neck Salad (คอหมูย่าง)",
           "price": 195,
-          "image": "assets/images/grilled_pork_neck.jpg",
+          "image": "assets/images/food/thai/Thai Grilled pork neck Salad.jpg",
         },
         {
           "name": "Thoong thong(Thai traditional spring shrimp roll) (ถุงทอง)",
           "price": 150,
-          "image": "assets/images/thoong_thong.jpg",
+          "image":
+              "assets/images/food/thai/Thoong thong(Thai traditional spring shrimp roll).jpg",
         },
         {
           "name":
               "Stir fried chicken with cashew nuts (ไก่ผัดเม็ดมะม่วงหิมพานต์)",
           "price": 250,
-          "image": "assets/images/chicken_cashew_nut.jpg",
+          "image":
+              "assets/images/food/thai/Stir fried chicken with cashew nuts.jpg",
         },
         {
           "name": "Stir-fried morning glory (ผัดผักบุ้ง)",
           "price": 125,
-          "image": "assets/images/stir_fried_morning_glory.jpg",
+          "image": "assets/images/food/thai/Stir-fried morning glory.jpg",
         },
         {
           "name": "Stir-fried chicken with ginger (ไก่ผัดขิง)",
           "price": 180,
-          "image": "assets/images/chicken_ginger.jpg",
+          "image": "assets/images/food/thai/Stir-fried chicken with ginger.jpg",
+        },
+        {
+          "name": "Stir-fried chicken with ginger and rice",
+          "price": 180,
+          "image":
+              "assets/images/food/thai/Stir-fried chicken with ginger and rice.jpg",
         },
         {
           "name": "Stir-fried spicy with herbs (ผัดฉ่า)",
@@ -1243,14 +1307,14 @@ final Map<String, dynamic> menuData = {
             {"label": "seafood(ทะเล)", "price": 250},
             {"label": "chicken(ไก่)", "price": 180},
           ],
-          "image": "assets/images/pad_cha.jpg",
+          "image": "assets/images/food/thai/Stir-fried spicy with herbs.jpg",
         },
       ],
       "Thai Soup": [
         {
           "name": "Green chicken curry (แกงเขียวหวาน)",
           "price": 180,
-          "image": "assets/images/green_curry.jpg",
+          "image": "assets/images/food/thai/Green chicken curry.jpg",
         },
         {
           "name": "Red curry (Paneang) (แพนงไก่)",
@@ -1259,17 +1323,18 @@ final Map<String, dynamic> menuData = {
             {"label": "Chicken(ไก่)", "price": 180},
             {"label": "shrimp(กุ้ง)", "price": 250},
           ],
-          "image": "assets/images/paneang.jpg",
+          "image": "assets/images/food/thai/Red curry (Paneang).jpg",
         },
         {
           "name": "Tom Yum Kung (ต้มยำกุ้ง)",
           "price": 250,
-          "image": "assets/images/tom_yum_kung.jpg",
+          "image": "assets/images/food/thai/Tom Yum Kung.jpg",
         },
         {
           "name": "Minced pork and soya bean curd soup (ต้มจืดเต้าหู้หมูสับ)",
           "price": 180,
-          "image": "assets/images/minced_pork_soup.jpg",
+          "image":
+              "assets/images/food/thai/Minced pork and soya bean curd soup.jpg",
         },
       ],
       "Thai Noodles": [
@@ -1282,7 +1347,7 @@ final Map<String, dynamic> menuData = {
             {"label": "shrimp(กุ้ง)", "price": 165},
             {"label": "seafood(ทะเล)", "price": 200},
           ],
-          "image": "assets/images/pad_thai.jpg",
+          "image": "assets/images/food/thai/Pud Thai.jpg",
         },
         {
           "name": "Stir-fried Noodle (ผัดซีอิ๊ว)",
@@ -1293,7 +1358,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Pork(หมู)", "price": 150},
             {"label": "Vegetables(ผัก)", "price": 150},
           ],
-          "image": "assets/images/pad_see_ew.jpg",
+          "image": "assets/images/food/thai/Stir-fried Noodle.jpg",
         },
         {
           "name": "Noodle in thick Gravy (ราดหน้า)",
@@ -1304,7 +1369,7 @@ final Map<String, dynamic> menuData = {
             {"label": "Pork(หมู)", "price": 150},
             {"label": "Vegetables(ผัก)", "price": 150},
           ],
-          "image": "assets/images/rad_na.jpg",
+          "image": "assets/images/food/thai/Noodle in thick Gravy.jpg",
         },
       ],
       "Thai Rice": [
@@ -1321,43 +1386,46 @@ final Map<String, dynamic> menuData = {
             {"label": "vegetable(ผัก)", "price": 145},
             {"label": "sausage(ไส้กรอก)", "price": 145},
           ],
-          "image": "assets/images/fried_rice_thai.jpg",
+          "image": "assets/images/food/thai/Fried rice.jpg",
         },
         {
           "name": "Krapow Pork with Rice (ข้าวกะเพระหมู)",
           "price": 129,
-          "image": "assets/images/krapow_moo.jpg",
+          "image": "assets/images/food/thai/Krapow Pork with Rice.jpg",
         },
         {
           "name": "Krapow Chicken with Rice (ข้าวกะเพราไก่)",
           "price": 129,
-          "image": "assets/images/krapow_gai.jpg",
+          "image": "assets/images/food/thai/Krapow Chicken with Rice.jpg",
         },
         {
           "name": "Krapow seafood with Rice (ข้าวกะเพราทะเล)",
           "price": 180,
-          "image": "assets/images/krapow_seafood.jpg",
+          "image": "assets/images/food/thai/Krapow seafood with Rice.jpg",
         },
         {
           "name": "Thai-style Fried Omelette with Rice (ข้าวไข่เจียว)",
           "price": 100,
-          "image": "assets/images/omelette_rice.jpg",
+          "image":
+              "assets/images/food/thai/Thai-style Fried Omelette with Rice.jpg",
         },
-      ],
-    },
-    "Others": {
-      "Categories": [
-        {"name": "Salad", "price": 0, "isPlaceholder": true},
-        {"name": "Sandwich", "price": 0, "isPlaceholder": true},
-        {"name": "Roti", "price": 0, "isPlaceholder": true},
-        {"name": "Pizza", "price": 0, "isPlaceholder": true},
-        {"name": "Spaghetti", "price": 0, "isPlaceholder": true},
-        {"name": "Gratin", "price": 0, "isPlaceholder": true},
-        {"name": "Appetizer", "price": 0, "isPlaceholder": true},
-        {"name": "Chorizo", "price": 295, "isPlaceholder": false},
-        {"name": "Steak", "price": 0, "isPlaceholder": true},
-        {"name": "Japanese", "price": 0, "isPlaceholder": true},
-        {"name": "Thai Foods", "price": 0, "isPlaceholder": true},
+        {
+          "name": "Thai-style Fried Omelette with Minced Pork and Rice",
+          "price": 120,
+          "image":
+              "assets/images/food/thai/Thai-style Fried Omelette with Minced Pork and Rice.jpg",
+        },
+        {
+          "name": "Thai-style Fried Omelette with Minced Pork",
+          "price": 120,
+          "image":
+              "assets/images/food/thai/Thai-style Fried Omelette with Minced Pork.jpg",
+        },
+        {
+          "name": "Thai-style Fried Omelette",
+          "price": 100,
+          "image": "assets/images/food/thai/Thai-style Fried Omelette.jpg",
+        },
       ],
     },
   },
@@ -1369,32 +1437,34 @@ final Map<String, dynamic> menuData = {
           "price": 200,
           "description":
               "choose 1 dressing: Maple syrup, Pure Honey, Caramel sauce, Chocolate sauce, Strawberry sauce",
-          "image": "assets/images/honey_toast.jpg",
+          "image": "assets/images/dessert/toast/ASTRO Honey Toast.jpg",
         },
         {
           "name": "Strawberry Custard Cream Toast",
           "price": 150,
           "description":
               "choose 1 dressing: Whipped cream, custard cream, strawberry sauce",
-          "image": "assets/images/strawberry_custard_toast.jpg",
+          "image":
+              "assets/images/dessert/toast/Strawberry Custard Cream Toast.jpg",
         },
         {
           "name": "Banana Custard Cream Toast",
           "price": 135,
           "description":
               "choose 1 dressing: Whipped cream, custard cream, caramel sauce",
-          "image": "assets/images/banana_custard_toast.jpg",
+          "image": "assets/images/dessert/toast/Banana Custard Cream Toast.jpg",
         },
         {
           "name": "Fruits Custard Cream Toast",
           "price": 150,
           "description": "choose 1 dressing: Whipped cream, custard cream",
-          "image": "assets/images/fruits_custard_toast.jpg",
+          "image": "assets/images/dessert/toast/Fruits Custard Cream Toast.jpg",
         },
         {
           "name": "Custard Banana Hot sandwich",
           "price": 180,
-          "image": "assets/images/custard_banana_sandwich.jpg",
+          "image":
+              "assets/images/dessert/toast/Custard Banana Hot sandwich.jpg",
         },
         {"name": "Custard cream", "price": 35, "isTopping": true},
         {"name": "Ice cream", "price": 35, "isTopping": true},
@@ -1409,14 +1479,14 @@ final Map<String, dynamic> menuData = {
           "price": 255,
           "description":
               "choose 1 dressing: Pure Honey, Caramel sauce, Chocolate sauce, Strawberry sauce",
-          "image": "assets/images/astro_custard_waffle.jpg",
+          "image": "assets/images/dessert/waffle/ASTRO Custard Waffle.jpg",
         },
         {
           "name": "ASTRO Waffle",
           "price": 225,
           "description":
               "choose 1 dressing: Pure Honey, Caramel sauce, Chocolate sauce, Strawberry sauce",
-          "image": "assets/images/astro_waffle.jpg",
+          "image": "assets/images/dessert/waffle/ASTRO Waffle.jpg",
         },
         {"name": "Custard cream", "price": 35, "isTopping": true},
         {"name": "Ice cream", "price": 35, "isTopping": true},
@@ -1429,22 +1499,22 @@ final Map<String, dynamic> menuData = {
         {
           "name": "Strawberry crepe",
           "price": 250,
-          "image": "assets/images/strawberry_crepe.jpg",
+          "image": "assets/images/dessert/crepe/Strawberry crepe.jpg",
         },
         {
           "name": "Mixed fruit crepe",
           "price": 265,
-          "image": "assets/images/mixed_fruit_crepe.jpg",
+          "image": "assets/images/dessert/crepe/Mixed fruit crepe.jpg",
         },
         {
           "name": "Banana crepe",
           "price": 250,
-          "image": "assets/images/banana_crepe.jpg",
+          "image": "assets/images/dessert/crepe/Banana crepe.jpg",
         },
         {
           "name": "Caramelized Banana Crepe",
           "price": 265,
-          "image": "assets/images/caramelized_banana_crepe.jpg",
+          "image": "assets/images/dessert/crepe/Caramelized Banana Crepe.jpg",
         },
         {"name": "Ice cream", "price": 35, "isTopping": true},
         {"name": "Whipping cream", "price": 35, "isTopping": true},
@@ -1456,34 +1526,40 @@ final Map<String, dynamic> menuData = {
         {
           "name": "Pancake & Ice Cream Maple syrup",
           "price": 225,
-          "image": "assets/images/pancake_ice_cream.jpg",
+          "image":
+              "assets/images/dessert/pancake/Pancake & Ice Cream Maple syrup.jpg",
         },
         {
           "name": "Plain pancake with maple syrup",
           "price": 145,
-          "image": "assets/images/plain_pancake.jpg",
+          "image":
+              "assets/images/dessert/pancake/Plain pancake with maple syrup.jpg",
         },
         {
           "name": "Mix Fruit Pancake Maple syrup",
           "price": 235,
-          "image": "assets/images/mix_fruit_pancake.jpg",
+          "image":
+              "assets/images/dessert/pancake/Mix Fruit Pancake Maple syrup.jpg",
         },
         {
           "name":
               "ASTRO double whipped cream azuki pancake with kuromisu syrup",
           "price": 235,
-          "image": "assets/images/azuki_pancake.jpg",
+          "image":
+              "assets/images/dessert/pancake/ASTRO double whipped cream azuki pancake with kuromisu syrup.jpg",
         },
         {
           "name":
               "ASTRO double whipped cream banana pancake with caramel sauce",
           "price": 235,
-          "image": "assets/images/banana_pancake.jpg",
+          "image":
+              "assets/images/dessert/pancake/ASTRO double whipped cream banana pancake with caramel sauce.jpg",
         },
         {
           "name": "ASTRO double whipped cream strawberry pancake",
           "price": 235,
-          "image": "assets/images/strawberry_pancake.jpg",
+          "image":
+              "assets/images/dessert/pancake/ASTRO double whipped cream strawberry_pancake.jpg",
         },
         {"name": "Ice cream", "price": 35, "isTopping": true},
         {"name": "Whipping cream", "price": 35, "isTopping": true},
@@ -1495,41 +1571,25 @@ final Map<String, dynamic> menuData = {
         {
           "name": "ASTRO roti ice cream with caramelized banana",
           "price": 250,
-          "image": "assets/images/roti_banana_ice_cream.jpg",
+          "image":
+              "assets/images/dessert/roti_banana/ASTRO roti ice cream with caramelized banana.jpg",
         },
         {
           "name": "Caramalized banana ice cream",
           "price": 185,
-          "image": "assets/images/caramelized_banana_ice_cream.jpg",
+          "image":
+              "assets/images/dessert/roti_banana/Caramalized banana ice cream.jpg",
         },
         {
           "name": "Fried crispy banana with ice cream",
           "price": 250,
-          "image": "assets/images/fried_banana_ice_cream.jpg",
+          "image":
+              "assets/images/dessert/roti_banana/Fried crispy banana with ice_cream.jpg",
         },
         {"name": "Ice cream", "price": 35, "isTopping": true},
         {"name": "Whipping cream", "price": 35, "isTopping": true},
         {"name": "Mixed fruit", "price": 35, "isTopping": true},
       ],
     },
-  },
-  "Chorizo": {
-    "Sausage Selection": [
-      {
-        "name": "Chorizo & herb sausage",
-        "price": 295,
-        "image": "assets/images/chorizo_herb.jpg",
-      },
-      {
-        "name": "Chorizo Sausage with Fried Potatoes",
-        "price": 295,
-        "image": "assets/images/chorizo_potato.jpg",
-      },
-      {
-        "name": "Herb Sausage with German Fried Potatoes",
-        "price": 295,
-        "image": "assets/images/herb_sausage_potato.jpg",
-      },
-    ],
   },
 };

@@ -26,21 +26,28 @@ class _MenuBookPageState extends State<MenuBookPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Build menu pages FIRST so _categoryIndices is populated
+    // before TOC and SideTabs try to use it
+    final menuPages = _buildAllMenuPages();
+
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Stack(
+      body: Row(
         children: [
-          PageFlipWidget(
-            key: _controller,
-            backgroundColor: Colors.black,
-            lastPage: _buildLastPage(),
-            children: [
-              _buildCoverPage(),
-              _buildWelcomeQRPage(),
-              _buildTOCPage(),
-              ..._buildAllMenuPages(),
-              _buildBackCoverPage(),
-            ],
+          Expanded(
+            child: PageFlipWidget(
+              key: _controller,
+              backgroundColor: Colors.black,
+              lastPage: Container(color: Colors.black),
+              children: [
+                _buildCoverPage(),
+                _buildWelcomeQRPage(),
+                _buildTOCPage(),
+                ...menuPages,
+                _buildBackCoverPage(),
+                _buildLastPage(),
+              ],
+            ),
           ),
           _buildSideTabs(),
         ],
@@ -64,7 +71,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
       );
       currentIndex++;
       menuData["Drinks"].forEach((title, data) {
-        pages.add(_buildMenuCategoryPage(title, data));
+        pages.add(_buildMenuCategoryPage(title, data, showImage: false));
         currentIndex++;
       });
     }
@@ -301,7 +308,11 @@ class _MenuBookPageState extends State<MenuBookPage> {
     );
   }
 
-  Widget _buildMenuCategoryPage(String title, dynamic categoryData) {
+  Widget _buildMenuCategoryPage(
+    String title,
+    dynamic categoryData, {
+    bool showImage = true,
+  }) {
     List<Widget> listItems = [];
     if (categoryData is Map) {
       categoryData.forEach((sectionTitle, items) {
@@ -331,10 +342,14 @@ class _MenuBookPageState extends State<MenuBookPage> {
         );
         if (items is List) {
           for (var item in items) {
-            listItems.add(_buildPremiumMenuItem(item));
+            listItems.add(_buildPremiumMenuItem(item, showImage: showImage));
           }
         }
       });
+    } else if (categoryData is List) {
+      for (var item in categoryData) {
+        listItems.add(_buildPremiumMenuItem(item, showImage: showImage));
+      }
     }
 
     return Container(
@@ -372,7 +387,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
     );
   }
 
-  Widget _buildPremiumMenuItem(dynamic item) {
+  Widget _buildPremiumMenuItem(dynamic item, {bool showImage = true}) {
     if (item["isPlaceholder"] == true) return const SizedBox.shrink();
     if (item["isTopping"] == true) {
       return Padding(
@@ -399,6 +414,83 @@ class _MenuBookPageState extends State<MenuBookPage> {
       );
     }
 
+    String imagePath = item["image"] ?? "";
+    bool isNetwork = false;
+
+    // Check if it's an HTML img tag and extract the src
+    if (imagePath.contains("<img") && imagePath.contains("src=\"")) {
+      final startIndex = imagePath.indexOf("src=\"") + 5;
+      final endIndex = imagePath.indexOf("\"", startIndex);
+      if (startIndex != -1 && endIndex != -1) {
+        imagePath = imagePath.substring(startIndex, endIndex);
+      }
+    }
+
+    // Convert Google Drive links to direct image links
+    if (imagePath.contains("drive.google.com")) {
+      String? fileId;
+      // Handle /file/d/ID/view format
+      if (imagePath.contains("/file/d/")) {
+        final parts = imagePath.split("/file/d/");
+        if (parts.length > 1) {
+          fileId = parts[1].split("/").first;
+        }
+      }
+      // Handle id=ID format
+      else if (imagePath.contains("id=")) {
+        final uri = Uri.tryParse(imagePath);
+        if (uri != null && uri.queryParameters.containsKey("id")) {
+          fileId = uri.queryParameters["id"];
+        }
+      }
+
+      if (fileId != null) {
+        // Use the undocumented lh3.googleusercontent.com endpoint
+        // This endpoint natively supports CORS for Flutter Web without needing an external proxy
+        imagePath = "https://lh3.googleusercontent.com/d/$fileId=w1000";
+      }
+    }
+
+    // Check if it's a URL
+    if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
+      isNetwork = true;
+    }
+
+    Widget imageWidget =
+        isNetwork
+            ? Image.network(
+              imagePath,
+              width: 65,
+              height: 65,
+              fit: BoxFit.cover,
+              errorBuilder: _buildImageErrorPlaceholder,
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) return child;
+                return Container(
+                  width: 65,
+                  height: 65,
+                  color: vintagePaper,
+                  child: const Center(
+                    child: SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(
+                        color: goldAccent,
+                        strokeWidth: 2,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            )
+            : Image.asset(
+              imagePath,
+              width: 65,
+              height: 65,
+              fit: BoxFit.cover,
+              errorBuilder: _buildImageErrorPlaceholder,
+            );
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15),
       child: Column(
@@ -406,25 +498,15 @@ class _MenuBookPageState extends State<MenuBookPage> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: goldAccent, width: 1),
+              if (showImage) ...[
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: goldAccent, width: 1),
+                  ),
+                  child: imageWidget,
                 ),
-                child: Image.asset(
-                  item["image"] ?? "",
-                  width: 65,
-                  height: 65,
-                  fit: BoxFit.cover,
-                  errorBuilder:
-                      (c, e, s) => Container(
-                        width: 65,
-                        height: 65,
-                        color: Colors.grey.shade200,
-                        child: const Icon(Icons.restaurant, size: 20),
-                      ),
-                ),
-              ),
-              const SizedBox(width: 15),
+                const SizedBox(width: 15),
+              ],
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -588,10 +670,9 @@ class _MenuBookPageState extends State<MenuBookPage> {
   }
 
   Widget _buildSideTabs() {
-    return Positioned(
-      right: 0,
-      top: 100,
-      bottom: 100,
+    return Container(
+      width: 36,
+      color: Colors.black,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children:
@@ -602,8 +683,8 @@ class _MenuBookPageState extends State<MenuBookPage> {
                   onTap: () => _controller.currentState?.goToPage(entry.value),
                   child: Container(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 15,
+                      horizontal: 6,
+                      vertical: 14,
                     ),
                     decoration: BoxDecoration(
                       color: goldAccent,
@@ -624,7 +705,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
                         entry.key.substring(0, 3).toUpperCase(),
                         style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 10,
+                          fontSize: 9,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 1,
                         ),
@@ -634,6 +715,39 @@ class _MenuBookPageState extends State<MenuBookPage> {
                 ),
               );
             }).toList(),
+      ),
+    );
+  }
+
+  Widget _buildImageErrorPlaceholder(
+    BuildContext context,
+    Object error,
+    StackTrace? stackTrace,
+  ) {
+    return Container(
+      width: 65,
+      height: 65,
+      color: vintagePaper,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.restaurant,
+              size: 20,
+              color: goldAccent.withValues(alpha: 0.5),
+            ),
+            const SizedBox(height: 2),
+            Text(
+              "N/A",
+              style: GoogleFonts.cinzel(
+                color: goldAccent.withValues(alpha: 0.5),
+                fontSize: 8,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
