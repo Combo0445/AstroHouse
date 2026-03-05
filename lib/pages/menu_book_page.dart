@@ -641,104 +641,155 @@ class _MenuBookPageState extends State<MenuBookPage> {
     bool isHeader(String key) => key.startsWith('[');
 
     return Container(
-      width: 60,
-      decoration: const BoxDecoration(
-        color: deepLeather,
-        border: Border(left: BorderSide(color: goldAccent, width: 1)),
+      width: 70,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            deepLeather,
+            deepLeather.withValues(alpha: 0.95),
+            const Color(0xFF2C1810),
+          ],
+        ),
+        border: const Border(left: BorderSide(color: goldAccent, width: 1.5)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.3),
+            blurRadius: 8,
+            offset: const Offset(-3, 0),
+          ),
+        ],
       ),
       child: Column(
         children: [
-          // Logo at top
+          // Logo area
           Container(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: const Icon(
-              Icons.restaurant_menu,
-              color: goldAccent,
-              size: 20,
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: goldAccent.withValues(alpha: 0.3),
+                  width: 1,
+                ),
+              ),
+            ),
+            child: Column(
+              children: [
+                Container(
+                  width: 28,
+                  height: 28,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: goldAccent, width: 1.5),
+                  ),
+                  child: const Icon(Icons.star, color: goldAccent, size: 14),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'MENU',
+                  style: GoogleFonts.cinzel(
+                    color: goldAccent,
+                    fontSize: 7,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 2,
+                  ),
+                ),
+              ],
             ),
           ),
-          Container(height: 1, color: goldAccent.withValues(alpha: 0.3)),
-          // Scrollable tabs
+          // Scrollable navigation
           Expanded(
             child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(vertical: 4),
               child: Column(
                 children:
                     _categoryIndices.entries.map((entry) {
                       if (isHeader(entry.key)) {
                         final info = _sectionInfo[entry.key];
-                        return InkWell(
-                          onTap:
-                              () => _controller.currentState?.goToPage(
-                                entry.value,
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 8, bottom: 2),
+                          child: InkWell(
+                            onTap:
+                                () => _controller.currentState?.goToPage(
+                                  entry.value,
+                                ),
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 5),
+                              padding: const EdgeInsets.symmetric(vertical: 6),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    goldAccent.withValues(alpha: 0.25),
+                                    goldAccent.withValues(alpha: 0.1),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(6),
+                                border: Border.all(
+                                  color: goldAccent.withValues(alpha: 0.3),
+                                  width: 0.5,
+                                ),
                               ),
-                          child: Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.symmetric(vertical: 8),
-                            decoration: BoxDecoration(
-                              color: goldAccent.withValues(alpha: 0.2),
-                              border: Border(
-                                top: BorderSide(
-                                  color: goldAccent.withValues(alpha: 0.4),
-                                  width: 1,
-                                ),
-                                bottom: BorderSide(
-                                  color: goldAccent.withValues(alpha: 0.4),
-                                  width: 1,
-                                ),
-                              ),
-                            ),
-                            child: Column(
-                              children: [
-                                Icon(
-                                  info?['icon'] as IconData? ?? Icons.menu_book,
-                                  color: goldAccent,
-                                  size: 14,
-                                ),
-                                const SizedBox(height: 2),
-                                Text(
-                                  info?['label'] as String? ?? '',
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.cinzel(
+                              child: Column(
+                                children: [
+                                  Icon(
+                                    info?['icon'] as IconData? ??
+                                        Icons.menu_book,
                                     color: goldAccent,
-                                    fontSize: 7,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 1,
+                                    size: 16,
                                   ),
-                                ),
-                              ],
+                                  const SizedBox(height: 3),
+                                  Text(
+                                    info?['label'] as String? ?? '',
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.cinzel(
+                                      color: goldAccent,
+                                      fontSize: 6.5,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 0.5,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         );
                       } else {
-                        return InkWell(
-                          onTap:
-                              () => _controller.currentState?.goToPage(
-                                entry.value,
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 1.5,
+                          ),
+                          child: InkWell(
+                            onTap:
+                                () => _controller.currentState?.goToPage(
+                                  entry.value,
+                                ),
+                            borderRadius: BorderRadius.circular(4),
+                            child: Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 4,
+                                horizontal: 4,
                               ),
-                          child: Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 5,
-                              horizontal: 4,
-                            ),
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                border: Border.all(
                                   color: goldAccent.withValues(alpha: 0.08),
                                   width: 0.5,
                                 ),
                               ),
-                            ),
-                            child: Text(
-                              entry.key,
-                              textAlign: TextAlign.center,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: GoogleFonts.lora(
-                                color: goldAccent.withValues(alpha: 0.85),
-                                fontSize: 7,
-                                fontWeight: FontWeight.w500,
-                                height: 1.2,
+                              child: Text(
+                                entry.key,
+                                textAlign: TextAlign.center,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.lora(
+                                  color: goldAccent.withValues(alpha: 0.8),
+                                  fontSize: 7,
+                                  fontWeight: FontWeight.w500,
+                                  height: 1.15,
+                                ),
                               ),
                             ),
                           ),
