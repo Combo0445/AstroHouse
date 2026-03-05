@@ -38,7 +38,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
             child: PageFlipWidget(
               key: _controller,
               backgroundColor: Colors.black,
-              lastPage: Container(color: Colors.black),
+              lastPage: Container(color: deepLeather),
               children: [
                 _buildCoverPage(),
                 _buildWelcomeQRPage(),
