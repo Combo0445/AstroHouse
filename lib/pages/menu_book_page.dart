@@ -24,6 +24,8 @@ class _MenuBookPageState extends State<MenuBookPage> {
   // Menu URL for QR Code (Change this after deployment)
   final String menuUrl = "https://Combo0445.github.io/AstroHouse/";
 
+  bool _isScrolling = false;
+
   @override
   Widget build(BuildContext context) {
     // Build menu pages FIRST so _categoryIndices is populated
@@ -35,29 +37,55 @@ class _MenuBookPageState extends State<MenuBookPage> {
       endDrawer: _buildDrawer(),
       body: Stack(
         children: [
-          PageFlipWidget(
-            key: _controller,
-            backgroundColor: Colors.black,
-            lastPage: Container(color: deepLeather),
-            children: [
-              _buildCoverPage(),
-              _buildWelcomeQRPage(),
-              _buildTOCPage(),
-              ...menuPages,
-              _buildContactPage(),
-            ],
+          // Background wood/leather texture behind the book
+          Container(
+            decoration: const BoxDecoration(
+              gradient: RadialGradient(
+                colors: [Color(0xFF3E2723), Color(0xFF1B100B)],
+                radius: 1.2,
+              ),
+            ),
+          ),
+          NotificationListener<ScrollNotification>(
+            onNotification: (scrollInfo) {
+              if (scrollInfo is ScrollStartNotification) {
+                setState(() => _isScrolling = true);
+              } else if (scrollInfo is ScrollEndNotification) {
+                Future.delayed(const Duration(milliseconds: 500), () {
+                  if (mounted) setState(() => _isScrolling = false);
+                });
+              }
+              return true;
+            },
+            child: PageFlipWidget(
+              key: _controller,
+              backgroundColor:
+                  Colors.transparent, // Let the background show through
+              lastPage: Container(color: deepLeather),
+              children: [
+                _buildCoverPage(),
+                _buildWelcomeQRPage(),
+                _buildTOCPage(),
+                ...menuPages,
+                _buildContactPage(),
+              ],
+            ),
           ),
           Positioned(
             top: 25,
             right: 25,
             child: Builder(
               builder: (context) {
-                return FloatingActionButton(
-                  backgroundColor: goldAccent,
-                  foregroundColor: deepLeather,
-                  elevation: 8,
-                  onPressed: () => Scaffold.of(context).openEndDrawer(),
-                  child: const Icon(Icons.restaurant_menu),
+                return AnimatedOpacity(
+                  opacity: _isScrolling ? 0.2 : 0.9,
+                  duration: const Duration(milliseconds: 200),
+                  child: FloatingActionButton(
+                    backgroundColor: goldAccent,
+                    foregroundColor: deepLeather,
+                    elevation: 8,
+                    onPressed: () => Scaffold.of(context).openEndDrawer(),
+                    child: const Icon(Icons.restaurant_menu),
+                  ),
                 );
               },
             ),
@@ -653,7 +681,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
     return Container(
       decoration: BoxDecoration(
         color: vintagePaper,
-        border: Border.all(color: goldAccent.withValues(alpha: 0.3), width: 15),
+        border: Border.all(color: goldAccent.withValues(alpha: 0.3), width: 10),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 60),
       child: Column(
@@ -674,53 +702,58 @@ class _MenuBookPageState extends State<MenuBookPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children:
-                  _categoryIndices.entries
-                      .where((e) => e.key.startsWith('['))
-                      .map((entry) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                          child: InkWell(
-                            onTap:
-                                () => _controller.currentState?.goToPage(
-                                  entry.value,
-                                ),
-                            child: Row(
-                              children: [
-                                Text(
-                                  entry.key.replaceAll(RegExp(r'[\[\]]'), ''),
-                                  style: GoogleFonts.cinzel(
-                                    color: textDark,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                const Expanded(
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 8,
-                                    ),
-                                    child: Text(
-                                      '...................................',
-                                      maxLines: 1,
-                                      overflow: TextOverflow.clip,
-                                      style: TextStyle(color: Colors.grey),
-                                    ),
-                                  ),
-                                ),
-                                Text(
-                                  '${entry.value + 1}',
-                                  style: GoogleFonts.playfairDisplay(
-                                    color: goldAccent,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
+                  _categoryIndices.entries.where((e) => e.key.startsWith('[')).map((
+                    entry,
+                  ) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      child: InkWell(
+                        onTap:
+                            () =>
+                                _controller.currentState?.goToPage(entry.value),
+                        child: Row(
+                          children: [
+                            Text(
+                              entry.key.replaceAll(RegExp(r'[\[\]]'), ''),
+                              style: GoogleFonts.cinzel(
+                                color: textDark,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                        );
-                      })
-                      .toList(),
+                            // Dotted line that perfectly spans the available space
+                            Expanded(
+                              child: LayoutBuilder(
+                                builder: (context, constraints) {
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                    ),
+                                    child: CustomPaint(
+                                      size: Size(constraints.maxWidth, 1),
+                                      painter: _DottedLinePainter(
+                                        color: goldAccent.withValues(
+                                          alpha: 0.5,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                            Text(
+                              '${entry.value + 1}',
+                              style: GoogleFonts.playfairDisplay(
+                                color: goldAccent,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }).toList(),
             ),
           ),
           Text(
@@ -904,4 +937,29 @@ class _MenuBookPageState extends State<MenuBookPage> {
       ),
     );
   }
+}
+
+class _DottedLinePainter extends CustomPainter {
+  final Color color;
+  _DottedLinePainter({required this.color});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint =
+        Paint()
+          ..color = color
+          ..strokeWidth = 1
+          ..style = PaintingStyle.stroke;
+
+    const dashWidth = 3.0;
+    const dashSpace = 3.0;
+    double startX = 0;
+    while (startX < size.width) {
+      canvas.drawLine(Offset(startX, 0), Offset(startX + dashWidth, 0), paint);
+      startX += dashWidth + dashSpace;
+    }
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
