@@ -233,40 +233,45 @@ class _MenuBookPageState extends State<MenuBookPage> {
   }
 
   Widget _buildCategoryIntroPage(String title, String subtitle, {Key? key}) {
-    return Container(
+    return Material(
       key: key,
-      decoration: BoxDecoration(
-        color: vintagePaper,
-        border: Border.all(color: goldAccent.withValues(alpha: 0.3), width: 15),
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              title.toUpperCase(),
-              style: GoogleFonts.cinzel(
-                color: textDark,
-                fontSize: 42,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 6,
+      color: vintagePaper,
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: goldAccent.withValues(alpha: 0.3),
+            width: 15,
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                title.toUpperCase(),
+                style: GoogleFonts.cinzel(
+                  color: textDark,
+                  fontSize: 42,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 6,
+                ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 20),
-              height: 2,
-              width: 100,
-              color: goldAccent,
-            ),
-            Text(
-              subtitle,
-              style: GoogleFonts.playfairDisplay(
-                color: Colors.brown.shade400,
-                fontSize: 18,
-                fontStyle: FontStyle.italic,
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 20),
+                height: 2,
+                width: 100,
+                color: goldAccent,
               ),
-            ),
-          ],
+              Text(
+                subtitle,
+                style: GoogleFonts.playfairDisplay(
+                  color: Colors.brown.shade400,
+                  fontSize: 18,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -530,43 +535,45 @@ class _MenuBookPageState extends State<MenuBookPage> {
       }
     }
 
-    return Container(
+    return Material(
       key: key,
       color: vintagePaper,
-      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
-      child: Column(
-        children: [
-          Text(
-            title.toUpperCase(),
-            style: GoogleFonts.cinzel(
-              fontSize: 26,
-              fontWeight: FontWeight.w900,
-              color: textDark,
-              letterSpacing: 2,
-            ),
-          ),
-          const SizedBox(height: 5),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.star, size: 10, color: goldAccent),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                height: 1,
-                width: 40,
-                color: goldAccent,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
+        child: Column(
+          children: [
+            Text(
+              title.toUpperCase(),
+              style: GoogleFonts.cinzel(
+                fontSize: 26,
+                fontWeight: FontWeight.w900,
+                color: textDark,
+                letterSpacing: 2,
               ),
-              const Icon(Icons.star, size: 10, color: goldAccent),
-            ],
-          ),
-          const SizedBox(height: 20),
-          Expanded(
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Column(children: listItems),
             ),
-          ),
-        ],
+            const SizedBox(height: 5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.star, size: 10, color: goldAccent),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  height: 1,
+                  width: 40,
+                  color: goldAccent,
+                ),
+                const Icon(Icons.star, size: 10, color: goldAccent),
+              ],
+            ),
+            const SizedBox(height: 20),
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(children: listItems),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -734,7 +741,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
                                 },
                                 child: Container(
                                   // Ensure there is a hit-testable area even if transparent
-                                  color: Colors.white.withOpacity(0.01),
+                                  color: Colors.white.withValues(alpha: 0.01),
                                   padding: const EdgeInsets.all(12.0),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
@@ -751,7 +758,9 @@ class _MenuBookPageState extends State<MenuBookPage> {
                                       Container(
                                         padding: const EdgeInsets.all(4),
                                         decoration: BoxDecoration(
-                                          color: goldAccent.withOpacity(0.2),
+                                          color: goldAccent.withValues(
+                                            alpha: 0.2,
+                                          ),
                                           borderRadius: BorderRadius.circular(
                                             4,
                                           ),
@@ -815,7 +824,9 @@ class _MenuBookPageState extends State<MenuBookPage> {
                                       );
                                     },
                                     child: Container(
-                                      color: Colors.white.withOpacity(0.01),
+                                      color: Colors.white.withValues(
+                                        alpha: 0.01,
+                                      ),
                                       padding: const EdgeInsets.symmetric(
                                         vertical: 10.0,
                                         horizontal: 10.0,
@@ -1003,12 +1014,9 @@ class _MenuBookPageState extends State<MenuBookPage> {
             collapsedIconColor: goldAccent,
             title: GestureDetector(
               onTap: () {
-                _scaffoldKey.currentState?.closeEndDrawer();
-                Future.delayed(const Duration(milliseconds: 400), () {
+                Navigator.of(context).pop();
+                Future.delayed(const Duration(milliseconds: 600), () {
                   _controller.currentState?.goToPage(headerIndex);
-                  Future.delayed(const Duration(milliseconds: 100), () {
-                    if (mounted) setState(() {});
-                  });
                 });
               },
               child: Row(
@@ -1043,12 +1051,9 @@ class _MenuBookPageState extends State<MenuBookPage> {
                       ),
                     ),
                     onTap: () {
-                      _scaffoldKey.currentState?.closeEndDrawer();
-                      Future.delayed(const Duration(milliseconds: 400), () {
+                      Navigator.of(context).pop();
+                      Future.delayed(const Duration(milliseconds: 600), () {
                         _controller.currentState?.goToPage(subItem.value);
-                        Future.delayed(const Duration(milliseconds: 100), () {
-                          if (mounted) setState(() {});
-                        });
                       });
                     },
                   );
