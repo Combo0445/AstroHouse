@@ -1,3 +1,4 @@
 {
-    "dart.flutterSdkPath": "D:\\src\\flutter"
+    "dart.flutterSdkPath": "D:\\src\\flutter",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
