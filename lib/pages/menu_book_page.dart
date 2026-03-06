@@ -558,7 +558,12 @@ class _MenuBookPageState extends State<MenuBookPage> {
             ],
           ),
           const SizedBox(height: 20),
-          Expanded(child: ListView(children: listItems)),
+          Expanded(
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(children: listItems),
+            ),
+          ),
         ],
       ),
     );
@@ -705,7 +710,8 @@ class _MenuBookPageState extends State<MenuBookPage> {
                           Expanded(
                             child: Material(
                               color: Colors.transparent,
-                              child: InkWell(
+                              child: GestureDetector(
+                                behavior: HitTestBehavior.opaque,
                                 onTap: () {
                                   context.read<CartService>().addItem(
                                     name: item["name"],
@@ -725,7 +731,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
                                   );
                                 },
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(12.0),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
@@ -783,7 +789,8 @@ class _MenuBookPageState extends State<MenuBookPage> {
                                 padding: const EdgeInsets.only(bottom: 2),
                                 child: Material(
                                   color: Colors.transparent,
-                                  child: InkWell(
+                                  child: GestureDetector(
+                                    behavior: HitTestBehavior.opaque,
                                     onTap: () {
                                       context.read<CartService>().addItem(
                                         name: item["name"],
@@ -807,8 +814,8 @@ class _MenuBookPageState extends State<MenuBookPage> {
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
-                                        vertical: 6.0,
-                                        horizontal: 4.0,
+                                        vertical: 10.0,
+                                        horizontal: 10.0,
                                       ),
                                       child: Row(
                                         children: [
@@ -827,9 +834,9 @@ class _MenuBookPageState extends State<MenuBookPage> {
                                               color: goldAccent,
                                             ),
                                           ),
-                                          const SizedBox(width: 8),
+                                          const SizedBox(width: 12),
                                           Container(
-                                            padding: const EdgeInsets.all(2),
+                                            padding: const EdgeInsets.all(4),
                                             decoration: BoxDecoration(
                                               color: goldAccent.withValues(
                                                 alpha: 0.2,
@@ -839,7 +846,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
                                             ),
                                             child: const Icon(
                                               Icons.add_shopping_cart,
-                                              size: 14,
+                                              size: 16,
                                               color: textDark,
                                             ),
                                           ),
@@ -993,8 +1000,8 @@ class _MenuBookPageState extends State<MenuBookPage> {
             collapsedIconColor: goldAccent,
             title: GestureDetector(
               onTap: () {
-                Navigator.pop(context); // close drawer
-                Future.delayed(const Duration(milliseconds: 300), () {
+                Navigator.of(context).pop(); // close drawer
+                Future.delayed(const Duration(milliseconds: 350), () {
                   _controller.currentState?.goToPage(headerIndex);
                 });
               },
@@ -1030,8 +1037,8 @@ class _MenuBookPageState extends State<MenuBookPage> {
                       ),
                     ),
                     onTap: () {
-                      Navigator.pop(context);
-                      Future.delayed(const Duration(milliseconds: 300), () {
+                      Navigator.of(context).pop();
+                      Future.delayed(const Duration(milliseconds: 350), () {
                         _controller.currentState?.goToPage(subItem.value);
                       });
                     },
