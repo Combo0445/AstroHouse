@@ -31,6 +31,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
 
   late List<Widget> _allPages;
   late List<Widget> _menuPages;
+  int _flipKey = 0;
 
   @override
   void initState() {
@@ -65,12 +66,14 @@ class _MenuBookPageState extends State<MenuBookPage> {
               ),
             ),
           ),
-          PageFlipWidget(
-            key: _controller,
-            backgroundColor:
-                Colors.transparent, // Let the background show through
-            lastPage: Container(color: deepLeather),
-            children: _allPages,
+          KeyedSubtree(
+            key: ValueKey(_flipKey),
+            child: PageFlipWidget(
+              key: _controller,
+              backgroundColor: vintagePaper,
+              lastPage: Container(color: deepLeather),
+              children: _allPages,
+            ),
           ),
           Positioned(
             top: 25,
@@ -222,44 +225,50 @@ class _MenuBookPageState extends State<MenuBookPage> {
   }
 
   Widget _buildCategoryIntroPage(String title, String subtitle, {Key? key}) {
-    return Material(
-      key: key,
-      color: vintagePaper,
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: goldAccent.withValues(alpha: 0.3),
-            width: 15,
-          ),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                title.toUpperCase(),
-                style: GoogleFonts.cinzel(
-                  color: textDark,
-                  fontSize: 42,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 6,
-                ),
+    return RepaintBoundary(
+      child: Material(
+        key: key,
+        type: MaterialType.canvas,
+        color: vintagePaper,
+        elevation: 0,
+        child: SizedBox.expand(
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: goldAccent.withValues(alpha: 0.3),
+                width: 15,
               ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 20),
-                height: 2,
-                width: 100,
-                color: goldAccent,
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    title.toUpperCase(),
+                    style: GoogleFonts.cinzel(
+                      color: textDark,
+                      fontSize: 42,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 6,
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 20),
+                    height: 2,
+                    width: 100,
+                    color: goldAccent,
+                  ),
+                  Text(
+                    subtitle,
+                    style: GoogleFonts.playfairDisplay(
+                      color: Colors.brown.shade400,
+                      fontSize: 18,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                subtitle,
-                style: GoogleFonts.playfairDisplay(
-                  color: Colors.brown.shade400,
-                  fontSize: 18,
-                  fontStyle: FontStyle.italic,
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),
@@ -527,44 +536,50 @@ class _MenuBookPageState extends State<MenuBookPage> {
       }
     }
 
-    return Material(
-      key: key,
-      color: vintagePaper,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
-        child: Column(
-          children: [
-            Text(
-              title.toUpperCase(),
-              style: GoogleFonts.cinzel(
-                fontSize: 26,
-                fontWeight: FontWeight.w900,
-                color: textDark,
-                letterSpacing: 2,
-              ),
-            ),
-            const SizedBox(height: 5),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+    return RepaintBoundary(
+      child: Material(
+        key: key,
+        type: MaterialType.canvas,
+        color: vintagePaper,
+        elevation: 0,
+        child: SizedBox.expand(
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
+            child: Column(
               children: [
-                const Icon(Icons.star, size: 10, color: goldAccent),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  height: 1,
-                  width: 40,
-                  color: goldAccent,
+                Text(
+                  title.toUpperCase(),
+                  style: GoogleFonts.cinzel(
+                    fontSize: 26,
+                    fontWeight: FontWeight.w900,
+                    color: textDark,
+                    letterSpacing: 2,
+                  ),
                 ),
-                const Icon(Icons.star, size: 10, color: goldAccent),
+                const SizedBox(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.star, size: 10, color: goldAccent),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 10),
+                      height: 1,
+                      width: 40,
+                      color: goldAccent,
+                    ),
+                    const Icon(Icons.star, size: 10, color: goldAccent),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Expanded(
+                  child: SingleChildScrollView(
+                    physics: const ClampingScrollPhysics(),
+                    child: Column(children: listItems),
+                  ),
+                ),
               ],
             ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: SingleChildScrollView(
-                physics: const ClampingScrollPhysics(),
-                child: Column(children: listItems),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -1008,11 +1023,12 @@ class _MenuBookPageState extends State<MenuBookPage> {
             title: GestureDetector(
               onTap: () {
                 Navigator.of(context).pop();
-                Future.delayed(const Duration(milliseconds: 600), () {
-                  _controller.currentState?.goToPage(headerIndex);
-                  // Refresh hit-test tree after jump completes
-                  Future.delayed(const Duration(milliseconds: 200), () {
-                    if (mounted) setState(() {});
+                Future.delayed(const Duration(milliseconds: 1000), () {
+                  setState(() {
+                    _flipKey++; // Force reset PageFlipWidget
+                  });
+                  Future.delayed(const Duration(milliseconds: 100), () {
+                    _controller.currentState?.goToPage(headerIndex);
                   });
                 });
               },
@@ -1049,11 +1065,12 @@ class _MenuBookPageState extends State<MenuBookPage> {
                     ),
                     onTap: () {
                       Navigator.of(context).pop();
-                      Future.delayed(const Duration(milliseconds: 600), () {
-                        _controller.currentState?.goToPage(subItem.value);
-                        // Refresh hit-test tree after jump completes
-                        Future.delayed(const Duration(milliseconds: 200), () {
-                          if (mounted) setState(() {});
+                      Future.delayed(const Duration(milliseconds: 1000), () {
+                        setState(() {
+                          _flipKey++; // Force reset PageFlipWidget
+                        });
+                        Future.delayed(const Duration(milliseconds: 100), () {
+                          _controller.currentState?.goToPage(subItem.value);
                         });
                       });
                     },
