@@ -568,7 +568,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
             const SizedBox(height: 20),
             Expanded(
               child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
+                physics: const ClampingScrollPhysics(),
                 child: Column(children: listItems),
               ),
             ),
@@ -1017,6 +1017,10 @@ class _MenuBookPageState extends State<MenuBookPage> {
                 Navigator.of(context).pop();
                 Future.delayed(const Duration(milliseconds: 600), () {
                   _controller.currentState?.goToPage(headerIndex);
+                  // Refresh hit-test tree after jump completes
+                  Future.delayed(const Duration(milliseconds: 200), () {
+                    if (mounted) setState(() {});
+                  });
                 });
               },
               child: Row(
@@ -1054,6 +1058,10 @@ class _MenuBookPageState extends State<MenuBookPage> {
                       Navigator.of(context).pop();
                       Future.delayed(const Duration(milliseconds: 600), () {
                         _controller.currentState?.goToPage(subItem.value);
+                        // Refresh hit-test tree after jump completes
+                        Future.delayed(const Duration(milliseconds: 200), () {
+                          if (mounted) setState(() {});
+                        });
                       });
                     },
                   );
