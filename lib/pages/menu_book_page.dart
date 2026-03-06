@@ -667,50 +667,53 @@ class _MenuBookPageState extends State<MenuBookPage> {
                           ),
                         ),
                         if (item["priceOptions"] == null)
-                          Row(
-                            children: [
-                              Text(
-                                "${item["price"]}฿",
-                                style: GoogleFonts.montserrat(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w600,
-                                  color: goldAccent,
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              InkWell(
-                                onTap: () {
-                                  context.read<CartService>().addItem(
-                                    name: item["name"],
-                                    price: (item["price"] as num).toInt(),
-                                  );
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'Added ${item["name"]} to cart',
-                                        style: const TextStyle(
-                                          color: vintagePaper,
-                                        ),
+                          Expanded(
+                            child: InkWell(
+                              onTap: () {
+                                context.read<CartService>().addItem(
+                                  name: item["name"],
+                                  price: (item["price"] as num).toInt(),
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Added ${item["name"]} to cart',
+                                      style: const TextStyle(
+                                        color: vintagePaper,
                                       ),
-                                      backgroundColor: deepLeather,
-                                      duration: const Duration(seconds: 1),
                                     ),
-                                  );
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.all(4),
-                                  decoration: BoxDecoration(
-                                    color: goldAccent.withValues(alpha: 0.2),
-                                    borderRadius: BorderRadius.circular(4),
+                                    backgroundColor: deepLeather,
+                                    duration: const Duration(seconds: 1),
                                   ),
-                                  child: const Icon(
-                                    Icons.add_shopping_cart,
-                                    size: 18,
-                                    color: textDark,
+                                );
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    "${item["price"]}฿",
+                                    style: GoogleFonts.montserrat(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w600,
+                                      color: goldAccent,
+                                    ),
                                   ),
-                                ),
+                                  const SizedBox(width: 8),
+                                  Container(
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(
+                                      color: goldAccent.withValues(alpha: 0.2),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: const Icon(
+                                      Icons.add_shopping_cart,
+                                      size: 18,
+                                      color: textDark,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                       ],
                     ),
@@ -733,49 +736,45 @@ class _MenuBookPageState extends State<MenuBookPage> {
                             for (var opt in item["priceOptions"])
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 2),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      "- ${opt["label"]}",
-                                      style: GoogleFonts.lora(
-                                        fontSize: 13,
-                                        color: Colors.black54,
-                                      ),
-                                    ),
-                                    const Spacer(),
-                                    Text(
-                                      "${opt["price"]}฿",
-                                      style: GoogleFonts.montserrat(
-                                        fontSize: 13,
-                                        color: goldAccent,
-                                      ),
-                                    ),
-                                    const SizedBox(width: 8),
-                                    InkWell(
-                                      onTap: () {
-                                        context.read<CartService>().addItem(
-                                          name: item["name"],
-                                          price: (opt["price"] as num).toInt(),
-                                          optionLabel: opt["label"],
-                                        );
-                                        ScaffoldMessenger.of(
-                                          context,
-                                        ).showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                              'Added ${item["name"]} (${opt["label"]}) to cart',
-                                              style: const TextStyle(
-                                                color: vintagePaper,
-                                              ),
-                                            ),
-                                            backgroundColor: deepLeather,
-                                            duration: const Duration(
-                                              seconds: 1,
-                                            ),
+                                child: InkWell(
+                                  onTap: () {
+                                    context.read<CartService>().addItem(
+                                      name: item["name"],
+                                      price: (opt["price"] as num).toInt(),
+                                      optionLabel: opt["label"],
+                                    );
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Added ${item["name"]} (${opt["label"]}) to cart',
+                                          style: const TextStyle(
+                                            color: vintagePaper,
                                           ),
-                                        );
-                                      },
-                                      child: Container(
+                                        ),
+                                        backgroundColor: deepLeather,
+                                        duration: const Duration(seconds: 1),
+                                      ),
+                                    );
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "- ${opt["label"]}",
+                                        style: GoogleFonts.lora(
+                                          fontSize: 13,
+                                          color: Colors.black54,
+                                        ),
+                                      ),
+                                      const Spacer(),
+                                      Text(
+                                        "${opt["price"]}฿",
+                                        style: GoogleFonts.montserrat(
+                                          fontSize: 13,
+                                          color: goldAccent,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Container(
                                         padding: const EdgeInsets.all(2),
                                         decoration: BoxDecoration(
                                           color: goldAccent.withValues(
@@ -791,8 +790,8 @@ class _MenuBookPageState extends State<MenuBookPage> {
                                           color: textDark,
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                           ],
