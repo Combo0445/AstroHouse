@@ -31,7 +31,6 @@ class _MenuBookPageState extends State<MenuBookPage> {
 
   late List<Widget> _allPages;
   late List<Widget> _menuPages;
-  int _flipKey = 0;
 
   @override
   void initState() {
@@ -66,14 +65,11 @@ class _MenuBookPageState extends State<MenuBookPage> {
               ),
             ),
           ),
-          KeyedSubtree(
-            key: ValueKey(_flipKey),
-            child: PageFlipWidget(
-              key: _controller,
-              backgroundColor: vintagePaper,
-              lastPage: Container(color: deepLeather),
-              children: _allPages,
-            ),
+          PageFlipWidget(
+            key: _controller,
+            backgroundColor: vintagePaper,
+            lastPage: Container(color: deepLeather),
+            children: _allPages,
           ),
           Positioned(
             top: 25,
@@ -276,48 +272,58 @@ class _MenuBookPageState extends State<MenuBookPage> {
   }
 
   Widget _buildCoverPage({Key? key}) {
-    return Container(
-      key: key,
-      decoration: const BoxDecoration(color: deepLeather),
-      child: Container(
-        margin: const EdgeInsets.all(30),
-        decoration: BoxDecoration(
-          border: Border.all(color: goldAccent, width: 2),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'ASTRO',
-                style: GoogleFonts.cinzel(
-                  color: goldAccent,
-                  fontSize: 50,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 10,
-                ),
+    return RepaintBoundary(
+      child: Material(
+        type: MaterialType.canvas,
+        color: deepLeather,
+        child: Container(
+          key: key,
+          decoration: const BoxDecoration(color: deepLeather),
+          child: Container(
+            margin: const EdgeInsets.all(30),
+            decoration: BoxDecoration(
+              border: Border.all(color: goldAccent, width: 2),
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'ASTRO',
+                    style: GoogleFonts.cinzel(
+                      color: goldAccent,
+                      fontSize: 50,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 10,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'GASTRONOMY',
+                    style: GoogleFonts.cinzel(
+                      color: goldAccent,
+                      fontSize: 16,
+                      letterSpacing: 8,
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  const Icon(
+                    Icons.restaurant_menu,
+                    color: goldAccent,
+                    size: 40,
+                  ),
+                  const SizedBox(height: 60),
+                  Text(
+                    'PREMIUM MENU',
+                    style: GoogleFonts.playfairDisplay(
+                      color: goldAccent.withValues(alpha: 0.7),
+                      fontSize: 14,
+                      letterSpacing: 4,
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 10),
-              Text(
-                'GASTRONOMY',
-                style: GoogleFonts.cinzel(
-                  color: goldAccent,
-                  fontSize: 16,
-                  letterSpacing: 8,
-                ),
-              ),
-              const SizedBox(height: 40),
-              const Icon(Icons.restaurant_menu, color: goldAccent, size: 40),
-              const SizedBox(height: 60),
-              Text(
-                'PREMIUM MENU',
-                style: GoogleFonts.playfairDisplay(
-                  color: goldAccent.withValues(alpha: 0.7),
-                  fontSize: 14,
-                  letterSpacing: 4,
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),
@@ -325,132 +331,157 @@ class _MenuBookPageState extends State<MenuBookPage> {
   }
 
   Widget _buildWelcomeQRPage({Key? key}) {
-    return Container(
-      key: key,
-      decoration: BoxDecoration(
+    return RepaintBoundary(
+      child: Material(
+        type: MaterialType.canvas,
         color: vintagePaper,
-        border: Border.all(color: goldAccent.withValues(alpha: 0.3), width: 15),
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'WELCOME',
-              style: GoogleFonts.cinzel(
-                color: textDark,
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 4,
-              ),
+        child: Container(
+          key: key,
+          decoration: BoxDecoration(
+            color: vintagePaper,
+            border: Border.all(
+              color: goldAccent.withValues(alpha: 0.3),
+              width: 15,
             ),
-            const SizedBox(height: 10),
-            Text(
-              'Scan to view menu on your phone',
-              style: GoogleFonts.playfairDisplay(
-                color: Colors.brown.shade400,
-                fontSize: 16,
-                fontStyle: FontStyle.italic,
-              ),
-            ),
-            const SizedBox(height: 40),
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.1),
-                    blurRadius: 20,
-                    spreadRadius: 5,
+          ),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'WELCOME',
+                  style: GoogleFonts.cinzel(
+                    color: textDark,
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 4,
                   ),
-                ],
-              ),
-              child: QrImageView(
-                data:
-                    menuUrl, // เปลี่ยนเป็น IP ของเครื่องที่รันเพื่อใช้งานแบบ Offline/Local
-                version: QrVersions.auto,
-                size: 200.0,
-                eyeStyle: QrEyeStyle(
-                  eyeShape: QrEyeShape.square,
-                  color: textDark,
                 ),
-                dataModuleStyle: QrDataModuleStyle(
-                  dataModuleShape: QrDataModuleShape.square,
-                  color: textDark,
+                const SizedBox(height: 10),
+                Text(
+                  'Scan to view menu on your phone',
+                  style: GoogleFonts.playfairDisplay(
+                    color: Colors.brown.shade400,
+                    fontSize: 16,
+                    fontStyle: FontStyle.italic,
+                  ),
                 ),
-              ),
+                const SizedBox(height: 40),
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.1),
+                        blurRadius: 20,
+                        spreadRadius: 5,
+                      ),
+                    ],
+                  ),
+                  child: QrImageView(
+                    data: menuUrl,
+                    version: QrVersions.auto,
+                    size: 200.0,
+                    eyeStyle: QrEyeStyle(
+                      eyeShape: QrEyeShape.square,
+                      color: textDark,
+                    ),
+                    dataModuleStyle: QrDataModuleStyle(
+                      dataModuleShape: QrDataModuleShape.square,
+                      color: textDark,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 40),
+                Text(
+                  'OR FLIP TO CONTINUE',
+                  style: GoogleFonts.cinzel(
+                    color: goldAccent,
+                    fontSize: 12,
+                    letterSpacing: 2,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const Icon(
+                  Icons.arrow_forward_ios,
+                  color: goldAccent,
+                  size: 16,
+                ),
+              ],
             ),
-            const SizedBox(height: 40),
-            Text(
-              'OR FLIP TO CONTINUE',
-              style: GoogleFonts.cinzel(
-                color: goldAccent,
-                fontSize: 12,
-                letterSpacing: 2,
-              ),
-            ),
-            const SizedBox(height: 10),
-            const Icon(Icons.arrow_forward_ios, color: goldAccent, size: 16),
-          ],
+          ),
         ),
       ),
     );
   }
 
   Widget _buildContactPage({Key? key}) {
-    return Container(
-      key: key,
-      decoration: BoxDecoration(
+    return RepaintBoundary(
+      child: Material(
+        type: MaterialType.canvas,
         color: deepLeather,
-        border: Border.all(color: goldAccent.withValues(alpha: 0.3), width: 10),
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.stars, color: goldAccent, size: 40),
-            const SizedBox(height: 20),
-            Text(
-              'THANK YOU',
-              style: GoogleFonts.cinzel(
-                color: goldAccent,
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 3,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'FOR VISITING ASTRO HOUSE',
-              style: GoogleFonts.lora(
-                color: vintagePaper.withValues(alpha: 0.7),
-                fontSize: 12,
-                letterSpacing: 2,
-              ),
-            ),
-            const SizedBox(height: 50),
-            Container(
-              width: 150,
-              height: 1,
+        child: Container(
+          key: key,
+          decoration: BoxDecoration(
+            color: deepLeather,
+            border: Border.all(
               color: goldAccent.withValues(alpha: 0.3),
+              width: 10,
             ),
-            const SizedBox(height: 50),
-            _buildContactRow(
-              Icons.chat_bubble_outline,
-              'LINE OA',
-              '@astrohouse',
+          ),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.stars, color: goldAccent, size: 40),
+                const SizedBox(height: 20),
+                Text(
+                  'THANK YOU',
+                  style: GoogleFonts.cinzel(
+                    color: goldAccent,
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 3,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  'FOR VISITING ASTRO HOUSE',
+                  style: GoogleFonts.lora(
+                    color: vintagePaper.withValues(alpha: 0.7),
+                    fontSize: 12,
+                    letterSpacing: 2,
+                  ),
+                ),
+                const SizedBox(height: 50),
+                Container(
+                  width: 150,
+                  height: 1,
+                  color: goldAccent.withValues(alpha: 0.3),
+                ),
+                const SizedBox(height: 50),
+                _buildContactRow(
+                  Icons.chat_bubble_outline,
+                  'LINE OA',
+                  '@astrohouse',
+                ),
+                const SizedBox(height: 20),
+                _buildContactRow(
+                  Icons.facebook,
+                  'FACEBOOK',
+                  'Astro House Gastronomy',
+                ),
+                const SizedBox(height: 20),
+                _buildContactRow(
+                  Icons.phone_outlined,
+                  'CALL US',
+                  '089-123-4567',
+                ),
+              ],
             ),
-            const SizedBox(height: 20),
-            _buildContactRow(
-              Icons.facebook,
-              'FACEBOOK',
-              'Astro House Gastronomy',
-            ),
-            const SizedBox(height: 20),
-            _buildContactRow(Icons.phone_outlined, 'CALL US', '089-123-4567'),
-          ],
+          ),
         ),
       ),
     );
@@ -893,93 +924,110 @@ class _MenuBookPageState extends State<MenuBookPage> {
   }
 
   Widget _buildTOCPage({Key? key}) {
-    return Container(
-      key: key,
-      decoration: BoxDecoration(
+    return RepaintBoundary(
+      child: Material(
+        type: MaterialType.canvas,
         color: vintagePaper,
-        border: Border.all(color: goldAccent.withValues(alpha: 0.3), width: 10),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 60),
-      child: Column(
-        children: [
-          Text(
-            'CONTENTS',
-            style: GoogleFonts.cinzel(
-              color: textDark,
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 4,
+        child: Container(
+          key: key,
+          decoration: BoxDecoration(
+            color: vintagePaper,
+            border: Border.all(
+              color: goldAccent.withValues(alpha: 0.3),
+              width: 10,
             ),
           ),
-          const SizedBox(height: 10),
-          Container(height: 2, width: 60, color: goldAccent),
-          const SizedBox(height: 50),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:
-                  _categoryIndices.entries.where((e) => e.key.startsWith('[')).map((
-                    entry,
-                  ) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      child: InkWell(
-                        onTap:
-                            () =>
-                                _controller.currentState?.goToPage(entry.value),
-                        child: Row(
-                          children: [
-                            Text(
-                              entry.key.replaceAll(RegExp(r'[\[\]]'), ''),
-                              style: GoogleFonts.cinzel(
-                                color: textDark,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            // Dotted line that perfectly spans the available space
-                            Expanded(
-                              child: LayoutBuilder(
-                                builder: (context, constraints) {
-                                  return Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 10,
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 60),
+          child: Column(
+            children: [
+              Text(
+                'CONTENTS',
+                style: GoogleFonts.cinzel(
+                  color: textDark,
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 4,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Container(height: 2, width: 60, color: goldAccent),
+              const SizedBox(height: 50),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children:
+                      _categoryIndices.entries
+                          .where((e) => e.key.startsWith('['))
+                          .map((entry) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              child: InkWell(
+                                onTap:
+                                    () => _controller.currentState?.goToPage(
+                                      entry.value,
                                     ),
-                                    child: CustomPaint(
-                                      size: Size(constraints.maxWidth, 1),
-                                      painter: _DottedLinePainter(
-                                        color: goldAccent.withValues(
-                                          alpha: 0.5,
-                                        ),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      entry.key.replaceAll(
+                                        RegExp(r'[\[\]]'),
+                                        '',
+                                      ),
+                                      style: GoogleFonts.cinzel(
+                                        color: textDark,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                  );
-                                },
+                                    // Dotted line that perfectly spans the available space
+                                    Expanded(
+                                      child: LayoutBuilder(
+                                        builder: (context, constraints) {
+                                          return Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 10,
+                                            ),
+                                            child: CustomPaint(
+                                              size: Size(
+                                                constraints.maxWidth,
+                                                1,
+                                              ),
+                                              painter: _DottedLinePainter(
+                                                color: goldAccent.withValues(
+                                                  alpha: 0.5,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                    Text(
+                                      '${entry.value + 1}',
+                                      style: GoogleFonts.playfairDisplay(
+                                        color: goldAccent,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            Text(
-                              '${entry.value + 1}',
-                              style: GoogleFonts.playfairDisplay(
-                                color: goldAccent,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }).toList(),
-            ),
+                            );
+                          })
+                          .toList(),
+                ),
+              ),
+              Text(
+                '~ Astro House ~',
+                style: GoogleFonts.playfairDisplay(
+                  color: Colors.brown.shade300,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ],
           ),
-          Text(
-            '~ Astro House ~',
-            style: GoogleFonts.playfairDisplay(
-              color: Colors.brown.shade300,
-              fontStyle: FontStyle.italic,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -1024,12 +1072,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
               onTap: () {
                 Navigator.of(context).pop();
                 Future.delayed(const Duration(milliseconds: 1000), () {
-                  setState(() {
-                    _flipKey++; // Force reset PageFlipWidget
-                  });
-                  Future.delayed(const Duration(milliseconds: 100), () {
-                    _controller.currentState?.goToPage(headerIndex);
-                  });
+                  _controller.currentState?.goToPage(headerIndex);
                 });
               },
               child: Row(
@@ -1066,12 +1109,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
                     onTap: () {
                       Navigator.of(context).pop();
                       Future.delayed(const Duration(milliseconds: 1000), () {
-                        setState(() {
-                          _flipKey++; // Force reset PageFlipWidget
-                        });
-                        Future.delayed(const Duration(milliseconds: 100), () {
-                          _controller.currentState?.goToPage(subItem.value);
-                        });
+                        _controller.currentState?.goToPage(subItem.value);
                       });
                     },
                   );
