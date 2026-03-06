@@ -235,7 +235,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
       key: key,
       decoration: BoxDecoration(
         color: vintagePaper,
-        border: Border.all(color: goldAccent.withOpacity(0.3), width: 15),
+        border: Border.all(color: goldAccent.withValues(alpha: 0.3), width: 15),
       ),
       child: Center(
         child: Column(
