@@ -29,15 +29,23 @@ class _MenuBookPageState extends State<MenuBookPage> {
   // Menu URL for QR Code (Change this after deployment)
   final String menuUrl = "https://Combo0445.github.io/AstroHouse/";
 
-  bool _isScrolling = false;
+  late List<Widget> _allPages;
   late List<Widget> _menuPages;
 
   @override
   void initState() {
     super.initState();
-    // Build menu pages ONCE so _categoryIndices is populated
-    // stably and pages aren't recreated on setiap rebuild
+    // Build menu pages first to populate _categoryIndices
     _menuPages = _buildAllMenuPages();
+
+    // Now build all pages into a STABLE list to prevent PageFlipWidget glitches
+    _allPages = [
+      _buildCoverPage(key: const ValueKey('cover_page')),
+      _buildWelcomeQRPage(key: const ValueKey('welcome_page')),
+      _buildTOCPage(key: const ValueKey('toc_page')),
+      ..._menuPages,
+      _buildContactPage(key: const ValueKey('contact_page')),
+    ];
   }
 
   @override
@@ -57,39 +65,20 @@ class _MenuBookPageState extends State<MenuBookPage> {
               ),
             ),
           ),
-          NotificationListener<ScrollNotification>(
-            onNotification: (scrollInfo) {
-              if (scrollInfo is ScrollStartNotification) {
-                setState(() => _isScrolling = true);
-              } else if (scrollInfo is ScrollEndNotification) {
-                Future.delayed(const Duration(milliseconds: 500), () {
-                  if (mounted) setState(() => _isScrolling = false);
-                });
-              }
-              return true;
-            },
-            child: PageFlipWidget(
-              key: _controller,
-              backgroundColor:
-                  Colors.transparent, // Let the background show through
-              lastPage: Container(color: deepLeather),
-              children: [
-                _buildCoverPage(),
-                _buildWelcomeQRPage(),
-                _buildTOCPage(),
-                ..._menuPages,
-                _buildContactPage(),
-              ],
-            ),
+          PageFlipWidget(
+            key: _controller,
+            backgroundColor:
+                Colors.transparent, // Let the background show through
+            lastPage: Container(color: deepLeather),
+            children: _allPages,
           ),
           Positioned(
             top: 25,
             right: 25,
             child: Builder(
               builder: (context) {
-                return AnimatedOpacity(
-                  opacity: _isScrolling ? 0.2 : 0.9,
-                  duration: const Duration(milliseconds: 200),
+                return Opacity(
+                  opacity: 0.9,
                   child: Column(
                     children: [
                       FloatingActionButton(
@@ -277,8 +266,9 @@ class _MenuBookPageState extends State<MenuBookPage> {
     );
   }
 
-  Widget _buildCoverPage() {
+  Widget _buildCoverPage({Key? key}) {
     return Container(
+      key: key,
       decoration: const BoxDecoration(color: deepLeather),
       child: Container(
         margin: const EdgeInsets.all(30),
@@ -325,8 +315,9 @@ class _MenuBookPageState extends State<MenuBookPage> {
     );
   }
 
-  Widget _buildWelcomeQRPage() {
+  Widget _buildWelcomeQRPage({Key? key}) {
     return Container(
+      key: key,
       decoration: BoxDecoration(
         color: vintagePaper,
         border: Border.all(color: goldAccent.withValues(alpha: 0.3), width: 15),
@@ -399,8 +390,9 @@ class _MenuBookPageState extends State<MenuBookPage> {
     );
   }
 
-  Widget _buildContactPage() {
+  Widget _buildContactPage({Key? key}) {
     return Container(
+      key: key,
       decoration: BoxDecoration(
         color: deepLeather,
         border: Border.all(color: goldAccent.withValues(alpha: 0.3), width: 10),
@@ -885,8 +877,9 @@ class _MenuBookPageState extends State<MenuBookPage> {
     );
   }
 
-  Widget _buildTOCPage() {
+  Widget _buildTOCPage({Key? key}) {
     return Container(
+      key: key,
       decoration: BoxDecoration(
         color: vintagePaper,
         border: Border.all(color: goldAccent.withValues(alpha: 0.3), width: 10),
