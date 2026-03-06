@@ -29,13 +29,18 @@ class _MenuBookPageState extends State<MenuBookPage> {
   final String menuUrl = "https://Combo0445.github.io/AstroHouse/";
 
   bool _isScrolling = false;
+  late List<Widget> _menuPages;
+
+  @override
+  void initState() {
+    super.initState();
+    // Build menu pages ONCE so _categoryIndices is populated
+    // stably and pages aren't recreated on setiap rebuild
+    _menuPages = _buildAllMenuPages();
+  }
 
   @override
   Widget build(BuildContext context) {
-    // Build menu pages FIRST so _categoryIndices is populated
-    // before TOC and Drawer try to use it
-    final menuPages = _buildAllMenuPages();
-
     return Scaffold(
       backgroundColor: Colors.black,
       endDrawer: _buildDrawer(),
@@ -70,7 +75,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
                 _buildCoverPage(),
                 _buildWelcomeQRPage(),
                 _buildTOCPage(),
-                ...menuPages,
+                ..._menuPages,
                 _buildContactPage(),
               ],
             ),
