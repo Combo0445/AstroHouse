@@ -16,6 +16,7 @@ class MenuBookPage extends StatefulWidget {
 }
 
 class _MenuBookPageState extends State<MenuBookPage> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   final _controller = GlobalKey<PageFlipWidgetState>();
   final Map<String, int> _categoryIndices = {};
 
@@ -42,6 +43,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Colors.black,
       endDrawer: _buildDrawer(),
       body: Stack(
@@ -710,8 +712,8 @@ class _MenuBookPageState extends State<MenuBookPage> {
                           Expanded(
                             child: Material(
                               color: Colors.transparent,
-                              child: GestureDetector(
-                                behavior: HitTestBehavior.opaque,
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(8),
                                 onTap: () {
                                   context.read<CartService>().addItem(
                                     name: item["name"],
@@ -730,7 +732,9 @@ class _MenuBookPageState extends State<MenuBookPage> {
                                     ),
                                   );
                                 },
-                                child: Padding(
+                                child: Container(
+                                  // Ensure there is a hit-testable area even if transparent
+                                  color: Colors.white.withOpacity(0.01),
                                   padding: const EdgeInsets.all(12.0),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
@@ -747,9 +751,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
                                       Container(
                                         padding: const EdgeInsets.all(4),
                                         decoration: BoxDecoration(
-                                          color: goldAccent.withValues(
-                                            alpha: 0.2,
-                                          ),
+                                          color: goldAccent.withOpacity(0.2),
                                           borderRadius: BorderRadius.circular(
                                             4,
                                           ),
@@ -789,8 +791,8 @@ class _MenuBookPageState extends State<MenuBookPage> {
                                 padding: const EdgeInsets.only(bottom: 2),
                                 child: Material(
                                   color: Colors.transparent,
-                                  child: GestureDetector(
-                                    behavior: HitTestBehavior.opaque,
+                                  child: InkWell(
+                                    borderRadius: BorderRadius.circular(4),
                                     onTap: () {
                                       context.read<CartService>().addItem(
                                         name: item["name"],
@@ -812,7 +814,8 @@ class _MenuBookPageState extends State<MenuBookPage> {
                                         ),
                                       );
                                     },
-                                    child: Padding(
+                                    child: Container(
+                                      color: Colors.white.withOpacity(0.01),
                                       padding: const EdgeInsets.symmetric(
                                         vertical: 10.0,
                                         horizontal: 10.0,
@@ -1000,9 +1003,12 @@ class _MenuBookPageState extends State<MenuBookPage> {
             collapsedIconColor: goldAccent,
             title: GestureDetector(
               onTap: () {
-                Navigator.of(context).pop(); // close drawer
-                Future.delayed(const Duration(milliseconds: 350), () {
+                _scaffoldKey.currentState?.closeEndDrawer();
+                Future.delayed(const Duration(milliseconds: 400), () {
                   _controller.currentState?.goToPage(headerIndex);
+                  Future.delayed(const Duration(milliseconds: 100), () {
+                    if (mounted) setState(() {});
+                  });
                 });
               },
               child: Row(
@@ -1037,9 +1043,12 @@ class _MenuBookPageState extends State<MenuBookPage> {
                       ),
                     ),
                     onTap: () {
-                      Navigator.of(context).pop();
-                      Future.delayed(const Duration(milliseconds: 350), () {
+                      _scaffoldKey.currentState?.closeEndDrawer();
+                      Future.delayed(const Duration(milliseconds: 400), () {
                         _controller.currentState?.goToPage(subItem.value);
+                        Future.delayed(const Duration(milliseconds: 100), () {
+                          if (mounted) setState(() {});
+                        });
                       });
                     },
                   );
