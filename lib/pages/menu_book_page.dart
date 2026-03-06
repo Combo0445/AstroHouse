@@ -700,7 +700,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
                                 child: Container(
                                   padding: const EdgeInsets.all(4),
                                   decoration: BoxDecoration(
-                                    color: goldAccent.withOpacity(0.2),
+                                    color: goldAccent.withValues(alpha: 0.2),
                                     borderRadius: BorderRadius.circular(4),
                                   ),
                                   child: const Icon(
@@ -778,7 +778,9 @@ class _MenuBookPageState extends State<MenuBookPage> {
                                       child: Container(
                                         padding: const EdgeInsets.all(2),
                                         decoration: BoxDecoration(
-                                          color: goldAccent.withOpacity(0.2),
+                                          color: goldAccent.withValues(
+                                            alpha: 0.2,
+                                          ),
                                           borderRadius: BorderRadius.circular(
                                             4,
                                           ),

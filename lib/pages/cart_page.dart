@@ -147,7 +147,7 @@ class _CartPageState extends State<CartPage> {
                   Icon(
                     Icons.shopping_cart_outlined,
                     size: 80,
-                    color: goldAccent.withOpacity(0.5),
+                    color: goldAccent.withValues(alpha: 0.5),
                   ),
                   const SizedBox(height: 20),
                   Text(
@@ -176,7 +176,7 @@ class _CartPageState extends State<CartPage> {
                   itemCount: cart.items.length,
                   separatorBuilder:
                       (context, index) =>
-                          Divider(color: goldAccent.withOpacity(0.3)),
+                          Divider(color: goldAccent.withValues(alpha: 0.3)),
                   itemBuilder: (context, index) {
                     final item = cart.items[index];
                     return Row(
@@ -265,7 +265,7 @@ class _CartPageState extends State<CartPage> {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withValues(alpha: 0.05),
             offset: const Offset(0, -5),
             blurRadius: 10,
           ),

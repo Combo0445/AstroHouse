@@ -7,7 +7,7 @@ class CartItem {
   int quantity;
 
   // A unique ID to identify the exact variation of the item
-  String get id => optionLabel != null ? '\$name-\$optionLabel' : name;
+  String get id => optionLabel != null ? '$name-$optionLabel' : name;
 
   int get unitPrice => basePrice;
   int get totalPrice => unitPrice * quantity;
@@ -42,7 +42,7 @@ class CartService extends ChangeNotifier {
     required int price,
     String? optionLabel,
   }) {
-    final newItemId = optionLabel != null ? '\$name-\$optionLabel' : name;
+    final newItemId = optionLabel != null ? '$name-$optionLabel' : name;
 
     // Check if item exist
     final existingIndex = _items.indexWhere((item) => item.id == newItemId);
