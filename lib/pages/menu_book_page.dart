@@ -171,7 +171,14 @@ class _MenuBookPageState extends State<MenuBookPage> {
       currentIndex++;
       menuData["Drinks"].forEach((title, data) {
         _categoryIndices[title] = currentIndex;
-        pages.add(_buildMenuCategoryPage(title, data, showImage: false));
+        pages.add(
+          _buildMenuCategoryPage(
+            title,
+            data,
+            showImage: false,
+            key: ValueKey('menu_$title'),
+          ),
+        );
         currentIndex++;
       });
     }
@@ -179,11 +186,23 @@ class _MenuBookPageState extends State<MenuBookPage> {
     // Food Pages
     if (menuData.containsKey("Food")) {
       _categoryIndices["[FOOD]"] = currentIndex;
-      pages.add(_buildCategoryIntroPage("Cuisine", "A Culinary Journey"));
+      pages.add(
+        _buildCategoryIntroPage(
+          "Cuisine",
+          "A Culinary Journey",
+          key: const ValueKey('intro_Food'),
+        ),
+      );
       currentIndex++;
       menuData["Food"].forEach((subCategory, data) {
         _categoryIndices[subCategory] = currentIndex;
-        pages.add(_buildMenuCategoryPage(subCategory, data));
+        pages.add(
+          _buildMenuCategoryPage(
+            subCategory,
+            data,
+            key: ValueKey('menu_$subCategory'),
+          ),
+        );
         currentIndex++;
       });
     }
@@ -191,11 +210,19 @@ class _MenuBookPageState extends State<MenuBookPage> {
     // Dessert Pages
     if (menuData.containsKey("Dessert")) {
       _categoryIndices["[DESSERT]"] = currentIndex;
-      pages.add(_buildCategoryIntroPage("Sweets", "The Perfect Ending"));
+      pages.add(
+        _buildCategoryIntroPage(
+          "Sweets",
+          "The Perfect Ending",
+          key: const ValueKey('intro_Dessert'),
+        ),
+      );
       currentIndex++;
       menuData["Dessert"].forEach((title, data) {
         _categoryIndices[title] = currentIndex;
-        pages.add(_buildMenuCategoryPage(title, data));
+        pages.add(
+          _buildMenuCategoryPage(title, data, key: ValueKey('menu_$title')),
+        );
         currentIndex++;
       });
     }
@@ -203,11 +230,12 @@ class _MenuBookPageState extends State<MenuBookPage> {
     return pages;
   }
 
-  Widget _buildCategoryIntroPage(String title, String subtitle) {
+  Widget _buildCategoryIntroPage(String title, String subtitle, {Key? key}) {
     return Container(
+      key: key,
       decoration: BoxDecoration(
         color: vintagePaper,
-        border: Border.all(color: goldAccent.withValues(alpha: 0.3), width: 15),
+        border: Border.all(color: goldAccent.withOpacity(0.3), width: 15),
       ),
       child: Center(
         child: Column(
@@ -459,6 +487,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
     String title,
     dynamic categoryData, {
     bool showImage = true,
+    Key? key,
   }) {
     List<Widget> listItems = [];
     if (categoryData is Map) {
@@ -500,6 +529,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
     }
 
     return Container(
+      key: key,
       color: vintagePaper,
       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
       child: Column(
@@ -673,50 +703,60 @@ class _MenuBookPageState extends State<MenuBookPage> {
                         ),
                         if (item["priceOptions"] == null)
                           Expanded(
-                            child: InkWell(
-                              onTap: () {
-                                context.read<CartService>().addItem(
-                                  name: item["name"],
-                                  price: (item["price"] as num).toInt(),
-                                );
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'Added ${item["name"]} to cart',
-                                      style: const TextStyle(
-                                        color: vintagePaper,
+                            child: Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                onTap: () {
+                                  context.read<CartService>().addItem(
+                                    name: item["name"],
+                                    price: (item["price"] as num).toInt(),
+                                  );
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'Added ${item["name"]} to cart',
+                                        style: const TextStyle(
+                                          color: vintagePaper,
+                                        ),
                                       ),
+                                      backgroundColor: deepLeather,
+                                      duration: const Duration(seconds: 1),
                                     ),
-                                    backgroundColor: deepLeather,
-                                    duration: const Duration(seconds: 1),
+                                  );
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        "${item["price"]}฿",
+                                        style: GoogleFonts.montserrat(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w600,
+                                          color: goldAccent,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Container(
+                                        padding: const EdgeInsets.all(4),
+                                        decoration: BoxDecoration(
+                                          color: goldAccent.withValues(
+                                            alpha: 0.2,
+                                          ),
+                                          borderRadius: BorderRadius.circular(
+                                            4,
+                                          ),
+                                        ),
+                                        child: const Icon(
+                                          Icons.add_shopping_cart,
+                                          size: 18,
+                                          color: textDark,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                );
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    "${item["price"]}฿",
-                                    style: GoogleFonts.montserrat(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w600,
-                                      color: goldAccent,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 8),
-                                  Container(
-                                    padding: const EdgeInsets.all(4),
-                                    decoration: BoxDecoration(
-                                      color: goldAccent.withValues(alpha: 0.2),
-                                      borderRadius: BorderRadius.circular(4),
-                                    ),
-                                    child: const Icon(
-                                      Icons.add_shopping_cart,
-                                      size: 18,
-                                      color: textDark,
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
                             ),
                           ),
@@ -741,61 +781,71 @@ class _MenuBookPageState extends State<MenuBookPage> {
                             for (var opt in item["priceOptions"])
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 2),
-                                child: InkWell(
-                                  onTap: () {
-                                    context.read<CartService>().addItem(
-                                      name: item["name"],
-                                      price: (opt["price"] as num).toInt(),
-                                      optionLabel: opt["label"],
-                                    );
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          'Added ${item["name"]} (${opt["label"]}) to cart',
-                                          style: const TextStyle(
-                                            color: vintagePaper,
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    onTap: () {
+                                      context.read<CartService>().addItem(
+                                        name: item["name"],
+                                        price: (opt["price"] as num).toInt(),
+                                        optionLabel: opt["label"],
+                                      );
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'Added ${item["name"]} (${opt["label"]}) to cart',
+                                            style: const TextStyle(
+                                              color: vintagePaper,
+                                            ),
                                           ),
+                                          backgroundColor: deepLeather,
+                                          duration: const Duration(seconds: 1),
                                         ),
-                                        backgroundColor: deepLeather,
-                                        duration: const Duration(seconds: 1),
+                                      );
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 6.0,
+                                        horizontal: 4.0,
                                       ),
-                                    );
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        "- ${opt["label"]}",
-                                        style: GoogleFonts.lora(
-                                          fontSize: 13,
-                                          color: Colors.black54,
-                                        ),
-                                      ),
-                                      const Spacer(),
-                                      Text(
-                                        "${opt["price"]}฿",
-                                        style: GoogleFonts.montserrat(
-                                          fontSize: 13,
-                                          color: goldAccent,
-                                        ),
-                                      ),
-                                      const SizedBox(width: 8),
-                                      Container(
-                                        padding: const EdgeInsets.all(2),
-                                        decoration: BoxDecoration(
-                                          color: goldAccent.withValues(
-                                            alpha: 0.2,
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            "- ${opt["label"]}",
+                                            style: GoogleFonts.lora(
+                                              fontSize: 13,
+                                              color: Colors.black54,
+                                            ),
                                           ),
-                                          borderRadius: BorderRadius.circular(
-                                            4,
+                                          const Spacer(),
+                                          Text(
+                                            "${opt["price"]}฿",
+                                            style: GoogleFonts.montserrat(
+                                              fontSize: 13,
+                                              color: goldAccent,
+                                            ),
                                           ),
-                                        ),
-                                        child: const Icon(
-                                          Icons.add_shopping_cart,
-                                          size: 14,
-                                          color: textDark,
-                                        ),
+                                          const SizedBox(width: 8),
+                                          Container(
+                                            padding: const EdgeInsets.all(2),
+                                            decoration: BoxDecoration(
+                                              color: goldAccent.withValues(
+                                                alpha: 0.2,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(4),
+                                            ),
+                                            child: const Icon(
+                                              Icons.add_shopping_cart,
+                                              size: 14,
+                                              color: textDark,
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -944,7 +994,9 @@ class _MenuBookPageState extends State<MenuBookPage> {
             title: GestureDetector(
               onTap: () {
                 Navigator.pop(context); // close drawer
-                _controller.currentState?.goToPage(headerIndex);
+                Future.delayed(const Duration(milliseconds: 300), () {
+                  _controller.currentState?.goToPage(headerIndex);
+                });
               },
               child: Row(
                 children: [
@@ -979,7 +1031,9 @@ class _MenuBookPageState extends State<MenuBookPage> {
                     ),
                     onTap: () {
                       Navigator.pop(context);
-                      _controller.currentState?.goToPage(subItem.value);
+                      Future.delayed(const Duration(milliseconds: 300), () {
+                        _controller.currentState?.goToPage(subItem.value);
+                      });
                     },
                   );
                 }).toList(),
