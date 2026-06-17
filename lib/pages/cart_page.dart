@@ -40,6 +40,12 @@ class _CartPageState extends State<CartPage> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    _selectedTable = _tableOptions.first;
+  }
+
+  @override
   void dispose() {
     _nameController.dispose();
     _timeController.dispose();
@@ -97,24 +103,33 @@ class _CartPageState extends State<CartPage> {
     sb.writeln('💰 ยอดรวม: ${cart.totalPrice} บาท');
 
     // Launch LINE
-    // URL Encode the message
     final encodedMessage = Uri.encodeComponent(sb.toString());
-    final url = Uri.parse(
+    final lineAppUrl = Uri.parse(
+      'line://oaMessage/@158butwc/?$encodedMessage',
+    );
+    final lineWebUrl = Uri.parse(
       'https://line.me/R/oaMessage/@158butwc/?$encodedMessage',
     );
 
     try {
-      if (await canLaunchUrl(url)) {
-        await launchUrl(url, mode: LaunchMode.externalApplication);
+      if (await canLaunchUrl(lineAppUrl)) {
+        await launchUrl(lineAppUrl, mode: LaunchMode.externalApplication);
+      } else if (await canLaunchUrl(lineWebUrl)) {
+        await launchUrl(lineWebUrl, mode: LaunchMode.externalApplication);
       } else {
-        // Fallback for some web browsers
-        await launchUrl(url);
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('ไม่สามารถเปิด LINE ได้ (Cannot open LINE)'),
+            ),
+          );
+        }
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('ไม่สามารถเปิดแอป LINE ได้ (Cannot open LINE)'),
+            content: Text('ไม่สามารถเปิด LINE ได้ (Cannot open LINE)'),
           ),
         );
       }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_flip/page_flip.dart';
+import '../widgets/my_page_flip_widget.dart';
 import 'package:provider/provider.dart';
 import 'data/menu_data.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,7 +18,7 @@ class MenuBookPage extends StatefulWidget {
 
 class _MenuBookPageState extends State<MenuBookPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  final _controller = GlobalKey<PageFlipWidgetState>();
+  final _controller = GlobalKey<MyPageFlipWidgetState>();
   final Map<String, int> _categoryIndices = {};
 
   // Premium Colors
@@ -65,7 +66,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
               ),
             ),
           ),
-          PageFlipWidget(
+          MyPageFlipWidget(
             key: _controller,
             backgroundColor: vintagePaper,
             lastPage: Container(color: deepLeather),
@@ -962,10 +963,16 @@ class _MenuBookPageState extends State<MenuBookPage> {
                             return Padding(
                               padding: const EdgeInsets.symmetric(vertical: 12),
                               child: InkWell(
-                                onTap:
-                                    () => _controller.currentState?.goToPage(
-                                      entry.value,
-                                    ),
+                                onTap: () {
+                                  final idx = entry.value;
+                                  // Clear all captured images to avoid CustomPaint overlays
+                                  imageData.clear();
+                                  currentPage.value = -1;
+                                  currentWidget.value = Container();
+                                  Future.delayed(const Duration(milliseconds: 120), () {
+                                    _controller.currentState?.goToPage(idx);
+                                  });
+                                },
                                 child: Row(
                                   children: [
                                     Text(
@@ -1068,11 +1075,15 @@ class _MenuBookPageState extends State<MenuBookPage> {
             initiallyExpanded: false,
             iconColor: goldAccent,
             collapsedIconColor: goldAccent,
-            title: GestureDetector(
+              title: GestureDetector(
               onTap: () {
                 Navigator.of(context).pop();
                 Future.delayed(const Duration(milliseconds: 1000), () {
-                  _controller.currentState?.goToPage(headerIndex);
+                  final idx = headerIndex;
+                  imageData.clear();
+                  currentPage.value = -1;
+                  currentWidget.value = Container();
+                  _controller.currentState?.goToPage(idx);
                 });
               },
               child: Row(
@@ -1109,7 +1120,11 @@ class _MenuBookPageState extends State<MenuBookPage> {
                     onTap: () {
                       Navigator.of(context).pop();
                       Future.delayed(const Duration(milliseconds: 1000), () {
-                        _controller.currentState?.goToPage(subItem.value);
+                        final idx = subItem.value;
+                        imageData.clear();
+                        currentPage.value = -1;
+                        currentWidget.value = Container();
+                        _controller.currentState?.goToPage(idx);
                       });
                     },
                   );
