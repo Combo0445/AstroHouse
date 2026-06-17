@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import '../services/cart_service.dart';
+import '../config/app_config.dart';
 import 'cart_page.dart';
 
 class MenuBookPage extends StatefulWidget {
@@ -26,9 +27,6 @@ class _MenuBookPageState extends State<MenuBookPage> {
   static const Color vintagePaper = Color(0xFFFDF5E6);
   static const Color deepLeather = Color(0xFF3E2723);
   static const Color textDark = Color(0xFF2D241E);
-
-  // Menu URL for QR Code (Change this after deployment)
-  final String menuUrl = "https://Combo0445.github.io/AstroHouse/";
 
   late List<Widget> _allPages;
   late List<Widget> _menuPages;
@@ -382,7 +380,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
                     ],
                   ),
                   child: QrImageView(
-                    data: menuUrl,
+                    data: AppConfig.menuUrl,
                     version: QrVersions.auto,
                     size: 200.0,
                     eyeStyle: QrEyeStyle(

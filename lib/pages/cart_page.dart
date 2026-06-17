@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../services/cart_service.dart';
+import '../config/app_config.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -103,13 +104,8 @@ class _CartPageState extends State<CartPage> {
     sb.writeln('💰 ยอดรวม: ${cart.totalPrice} บาท');
 
     // Launch LINE
-    final encodedMessage = Uri.encodeComponent(sb.toString());
-    final lineAppUrl = Uri.parse(
-      'line://oaMessage/@158butwc/?$encodedMessage',
-    );
-    final lineWebUrl = Uri.parse(
-      'https://line.me/R/oaMessage/@158butwc/?$encodedMessage',
-    );
+    final lineAppUrl = Uri.parse(AppConfig.getLineOrderUrl(sb.toString()));
+    final lineWebUrl = Uri.parse(AppConfig.getLineWebUrl(sb.toString()));
 
     try {
       if (await canLaunchUrl(lineAppUrl)) {
