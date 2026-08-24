@@ -119,7 +119,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
                                       shape: BoxShape.circle,
                                     ),
                                     child: Text(
-                                      '\${cart.totalItems}',
+                                      '${cart.totalItems}',
                                       style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
@@ -464,7 +464,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
                 _buildContactRow(
                   Icons.chat_bubble_outline,
                   'LINE OA',
-                  '@astrohouse',
+                  AppConfig.lineOaId,
                 ),
                 const SizedBox(height: 20),
                 _buildContactRow(
