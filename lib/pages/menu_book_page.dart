@@ -287,18 +287,24 @@ class _MenuBookPageState extends State<MenuBookPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'ASTRO',
-                    style: GoogleFonts.cinzel(
-                      color: goldAccent,
-                      fontSize: 50,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 10,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        'ASTROHOUSE',
+                        style: GoogleFonts.cinzel(
+                          color: goldAccent,
+                          fontSize: 42,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 10,
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'GASTRONOMY',
+                    'CAFE',
                     style: GoogleFonts.cinzel(
                       color: goldAccent,
                       fontSize: 16,
@@ -447,7 +453,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  'FOR VISITING ASTRO HOUSE',
+                  'FOR VISITING ASTROHOUSE CAFE',
                   style: GoogleFonts.lora(
                     color: vintagePaper.withValues(alpha: 0.7),
                     fontSize: 12,
@@ -1054,7 +1060,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
                 ),
               ),
               Text(
-                '~ Astro House ~',
+                '~ Astrohouse Cafe ~',
                 style: GoogleFonts.playfairDisplay(
                   color: Colors.brown.shade300,
                   fontStyle: FontStyle.italic,
@@ -1193,7 +1199,7 @@ class _MenuBookPageState extends State<MenuBookPage> {
                 ),
                 const SizedBox(height: 15),
                 Text(
-                  'ASTRO MENU',
+                  'ASTROHOUSE MENU',
                   style: GoogleFonts.cinzel(
                     color: goldAccent,
                     fontSize: 22,

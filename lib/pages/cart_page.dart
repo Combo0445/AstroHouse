@@ -78,30 +78,33 @@ class _CartPageState extends State<CartPage> {
     }
 
     // Build the message
+    const divider = '━━━━━━━━━━━━━━━';
     final sb = StringBuffer();
-    sb.writeln('🛒 รายการสั่งอาหาร');
-    sb.writeln('------------------------');
+    sb.writeln('✨ ${AppConfig.restaurantName} ✨');
+    sb.writeln(divider);
 
     if (_orderType == 'Dine-in') {
-      sb.writeln('📍 รูปแบบ: ทานที่ร้าน');
-      sb.writeln('🪑 โต๊ะที่: $_selectedTable');
+      sb.writeln('🪑 ทานที่ร้าน · โต๊ะ $_selectedTable');
     } else {
-      sb.writeln('📦 รูปแบบ: รับกลับบ้าน (Takeaway)');
-      sb.writeln('👤 ชื่อผู้รับ: ${_nameController.text}');
-      sb.writeln('⏰ เวลามารับ: ${_timeController.text}');
+      sb.writeln('📦 รับกลับบ้าน · คุณ${_nameController.text}');
+      sb.writeln('⏰ รับเวลา ${_timeController.text}');
     }
+    sb.writeln(divider);
 
-    sb.writeln('------------------------');
-    for (int i = 0; i < cart.items.length; i++) {
-      final item = cart.items[i];
+    for (final item in cart.items) {
       final optionText =
-          item.optionLabel != null ? ' (${item.optionLabel})' : '';
+          item.optionLabel != null ? ' · ${item.optionLabel}' : '';
       sb.writeln(
-        '${i + 1}. ${item.name}$optionText x ${item.quantity} (${item.totalPrice}฿)',
+        '▫ ${item.name}$optionText x${item.quantity} — ${item.totalPrice}฿',
       );
+      if (item.note != null && item.note!.isNotEmpty) {
+        sb.writeln('   📝 ${item.note}');
+      }
     }
-    sb.writeln('------------------------');
-    sb.writeln('💰 ยอดรวม: ${cart.totalPrice} บาท');
+    sb.writeln(divider);
+    sb.writeln('💰 ยอดรวม ${cart.totalPrice} บาท');
+    sb.writeln();
+    sb.write('ขอบคุณที่อุดหนุนนะคะ 🙏');
 
     // Launch LINE
     final lineAppUrl = Uri.parse(AppConfig.getLineOrderUrl(sb.toString()));
@@ -190,71 +193,117 @@ class _CartPageState extends State<CartPage> {
                           Divider(color: goldAccent.withValues(alpha: 0.3)),
                   itemBuilder: (context, index) {
                     final item = cart.items[index];
-                    return Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                item.name,
-                                style: GoogleFonts.lora(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: textDark,
-                                ),
-                              ),
-                              if (item.optionLabel != null)
-                                Text(
-                                  item.optionLabel!,
-                                  style: GoogleFonts.lora(
-                                    fontSize: 13,
-                                    color: Colors.black54,
-                                  ),
-                                ),
-                              Text(
-                                '${item.unitPrice}฿',
-                                style: GoogleFonts.montserrat(
-                                  color: goldAccent,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            IconButton(
-                              icon: const Icon(
-                                Icons.remove_circle_outline,
-                                color: textDark,
-                              ),
-                              onPressed:
-                                  () => cart.updateQuantity(
-                                    item.id,
-                                    item.quantity - 1,
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    item.name,
+                                    style: GoogleFonts.lora(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: textDark,
+                                    ),
                                   ),
-                            ),
-                            Text(
-                              '${item.quantity}',
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            IconButton(
-                              icon: const Icon(
-                                Icons.add_circle_outline,
-                                color: textDark,
-                              ),
-                              onPressed:
-                                  () => cart.updateQuantity(
-                                    item.id,
-                                    item.quantity + 1,
+                                  if (item.optionLabel != null)
+                                    Text(
+                                      item.optionLabel!,
+                                      style: GoogleFonts.lora(
+                                        fontSize: 13,
+                                        color: Colors.black54,
+                                      ),
+                                    ),
+                                  Text(
+                                    '${item.unitPrice}฿',
+                                    style: GoogleFonts.montserrat(
+                                      color: goldAccent,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
+                                ],
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.remove_circle_outline,
+                                    color: textDark,
+                                  ),
+                                  onPressed:
+                                      () => cart.updateQuantity(
+                                        item.id,
+                                        item.quantity - 1,
+                                      ),
+                                ),
+                                Text(
+                                  '${item.quantity}',
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.add_circle_outline,
+                                    color: textDark,
+                                  ),
+                                  onPressed:
+                                      () => cart.updateQuantity(
+                                        item.id,
+                                        item.quantity + 1,
+                                      ),
+                                ),
+                              ],
                             ),
                           ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4, bottom: 4),
+                          child: TextFormField(
+                            key: ValueKey('note-${item.id}'),
+                            initialValue: item.note,
+                            onChanged:
+                                (value) => cart.updateNote(item.id, value),
+                            style: GoogleFonts.lora(
+                              fontSize: 13,
+                              fontStyle: FontStyle.italic,
+                              color: textDark,
+                            ),
+                            decoration: InputDecoration(
+                              isDense: true,
+                              prefixIcon: Icon(
+                                Icons.edit_note,
+                                size: 18,
+                                color: goldAccent.withValues(alpha: 0.8),
+                              ),
+                              prefixIconConstraints: const BoxConstraints(
+                                minWidth: 28,
+                                minHeight: 20,
+                              ),
+                              hintText:
+                                  'ความต้องการพิเศษ (ถ้ามี) เช่น ไม่ใส่ผัก, เผ็ดน้อย',
+                              hintStyle: GoogleFonts.lora(
+                                fontSize: 12.5,
+                                fontStyle: FontStyle.italic,
+                                color: Colors.black38,
+                              ),
+                              border: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: goldAccent.withValues(alpha: 0.3),
+                                ),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: goldAccent),
+                              ),
+                            ),
+                          ),
                         ),
                       ],
                     );

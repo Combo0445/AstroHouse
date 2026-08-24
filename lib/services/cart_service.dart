@@ -5,6 +5,7 @@ class CartItem {
   final int basePrice; // price can be base or specific to an option
   final String? optionLabel; // e.g., 'seafood(ทะเล)'
   int quantity;
+  String? note; // customer's special request, e.g. "ไม่ใส่ผัก, เผ็ดน้อย"
 
   // A unique ID to identify the exact variation of the item
   String get id => optionLabel != null ? '$name-$optionLabel' : name;
@@ -17,6 +18,7 @@ class CartItem {
     required this.basePrice,
     this.optionLabel,
     this.quantity = 1,
+    this.note,
   });
 
   @override
@@ -70,6 +72,15 @@ class CartService extends ChangeNotifier {
     final index = _items.indexWhere((item) => item.id == id);
     if (index >= 0) {
       _items[index].quantity = newQuantity;
+      notifyListeners();
+    }
+  }
+
+  void updateNote(String id, String? note) {
+    final index = _items.indexWhere((item) => item.id == id);
+    if (index >= 0) {
+      final trimmed = note?.trim();
+      _items[index].note = (trimmed == null || trimmed.isEmpty) ? null : trimmed;
       notifyListeners();
     }
   }

@@ -1,11 +1,11 @@
 {
-    "name": "restaurant_menu",
-    "short_name": "restaurant_menu",
+    "name": "Astrohouse Cafe",
+    "short_name": "Astrohouse Cafe",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#3E2723",
+    "theme_color": "#3E2723",
+    "description": "Astrohouse Cafe digital menu — browse, order, and pay a visit.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

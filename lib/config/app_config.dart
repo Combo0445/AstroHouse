@@ -8,7 +8,7 @@ class AppConfig {
   static const String lineOaId = '@158butwc';
 
   // Restaurant info
-  static const String restaurantName = 'ASTRO GASTRONOMY';
+  static const String restaurantName = 'ASTROHOUSE CAFE';
   static const String restaurantPhone = '089-123-4567';
   static const String restaurantEmail = '';
   static const String restaurantFacebook = 'Astro House Gastronomy';
