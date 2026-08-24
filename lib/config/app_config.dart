@@ -9,8 +9,9 @@ class AppConfig {
 
   // Restaurant info
   static const String restaurantName = 'ASTRO GASTRONOMY';
-  static const String restaurantPhone = '';
+  static const String restaurantPhone = '089-123-4567';
   static const String restaurantEmail = '';
+  static const String restaurantFacebook = 'Astro House Gastronomy';
 
   /// Get the full LINE order URL
   static String getLineOrderUrl(String message) {

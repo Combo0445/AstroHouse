@@ -470,13 +470,13 @@ class _MenuBookPageState extends State<MenuBookPage> {
                 _buildContactRow(
                   Icons.facebook,
                   'FACEBOOK',
-                  'Astro House Gastronomy',
+                  AppConfig.restaurantFacebook,
                 ),
                 const SizedBox(height: 20),
                 _buildContactRow(
                   Icons.phone_outlined,
                   'CALL US',
-                  '089-123-4567',
+                  AppConfig.restaurantPhone,
                 ),
               ],
             ),
@@ -618,26 +618,56 @@ class _MenuBookPageState extends State<MenuBookPage> {
   Widget _buildPremiumMenuItem(dynamic item, {bool showImage = true}) {
     if (item["isPlaceholder"] == true) return const SizedBox.shrink();
     if (item["isTopping"] == true) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 20),
-        child: Row(
-          children: [
-            const Text("•", style: TextStyle(color: goldAccent)),
-            const SizedBox(width: 8),
-            Text(
-              item["name"],
-              style: GoogleFonts.lora(
-                fontSize: 14,
-                fontStyle: FontStyle.italic,
-                color: Colors.black54,
+      return Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () {
+            context.read<CartService>().addItem(
+              name: item["name"],
+              price: (item["price"] as num).toInt(),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  'Added ${item["name"]} to cart',
+                  style: const TextStyle(color: vintagePaper),
+                ),
+                backgroundColor: deepLeather,
+                duration: const Duration(seconds: 1),
               ),
+            );
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 20),
+            child: Row(
+              children: [
+                const Text("•", style: TextStyle(color: goldAccent)),
+                const SizedBox(width: 8),
+                Text(
+                  item["name"],
+                  style: GoogleFonts.lora(
+                    fontSize: 14,
+                    fontStyle: FontStyle.italic,
+                    color: Colors.black54,
+                  ),
+                ),
+                const Spacer(),
+                Text(
+                  "${item["price"]}฿",
+                  style: GoogleFonts.montserrat(
+                    fontSize: 14,
+                    color: goldAccent,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Icon(
+                  Icons.add_shopping_cart,
+                  size: 14,
+                  color: goldAccent.withValues(alpha: 0.7),
+                ),
+              ],
             ),
-            const Spacer(),
-            Text(
-              "${item["price"]}฿",
-              style: GoogleFonts.montserrat(fontSize: 14, color: goldAccent),
-            ),
-          ],
+          ),
         ),
       );
     }

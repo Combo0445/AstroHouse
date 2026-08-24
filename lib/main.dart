@@ -29,7 +29,47 @@ class MyApp extends StatelessWidget {
         ),
         textTheme: GoogleFonts.robotoTextTheme(),
       ),
-      home: const MenuBookPage(),
+      home: const _AppStartupGate(),
+    );
+  }
+}
+
+/// Briefly holds the loading screen before revealing [MenuBookPage].
+///
+/// On web, the very first frame after the engine boots can have a short
+/// window where taps land before the graphics pipeline (WebGL/CanvasKit
+/// shader compilation, GPU context warm-up) is actually ready to respond,
+/// making early taps feel like they do nothing. Showing a plain loading
+/// screen for a moment keeps users from tapping into that window.
+class _AppStartupGate extends StatefulWidget {
+  const _AppStartupGate();
+
+  @override
+  State<_AppStartupGate> createState() => _AppStartupGateState();
+}
+
+class _AppStartupGateState extends State<_AppStartupGate> {
+  bool _ready = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(milliseconds: 900), () {
+      if (mounted) setState(() => _ready = true);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_ready) return const MenuBookPage();
+    return const Scaffold(
+      backgroundColor: Color(0xFF3E2723),
+      body: Center(
+        child: CircularProgressIndicator(
+          color: Color(0xFFD4AF37),
+          strokeWidth: 2.5,
+        ),
+      ),
     );
   }
 }
